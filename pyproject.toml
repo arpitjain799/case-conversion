@@ -1,57 +1,51 @@
 [tool.poetry]
 name = "case-conversion"
 version = "3.0.0"
-description = "Convert between different types of cases (unicode supported)"
+description = "Convert between different types of cases with acronym detection and unicode support."
 license = "MIT"
 authors = ["Alejandro Frias <joker454@gmail.com>"]
 repository = "https://github.com/AlejandroFrias/case-conversion"
 readme = "README.md"
-keywords = ["case", "convert", "conversion"]
+keywords = ["case", "string case", "convert", "conversion"]
 
-    [tool.poetry.dependencies]
-    python = "^3.6"
-    regex = "^2019.8"
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/AlejandroFrias/case-conversion/issues"
 
-    [tool.poetry.dev-dependencies]
-    mypy = "*"
+[tool.poetry.dependencies]
+python = "^3.6"
+regex = "^2019.8"
 
-    # flake8
-    flake8 = "*"
-    flake8-annotations-coverage = "*"
-    flake8-blind-except = "*"
-    flake8-comprehensions = "*"
-    flake8-debugger = "*"
-    flake8-docstrings = "*"
-    flake8-eradicate = "*"
-    pep8-naming = "*"
-    wemake-python-styleguide = "*"
-    darglint = "*"
+[tool.poetry.dev-dependencies]
+mypy = "*"
 
-    # formatting
-    black = "^19.3b0"
-    blacken-docs = "*"
-    docformatter = "*"
-    isort = "*"
+# flake8
+flake8 = "*"
+flake8-annotations-coverage = "*"
+flake8-blind-except = "*"
+flake8-comprehensions = "*"
+flake8-debugger = "*"
+flake8-docstrings = "*"
+flake8-eradicate = "*"
+pep8-naming = "*"
+wemake-python-styleguide = "*"
 
-    # pytest
-    pytest = "*"
-    pytest-cov = "*"
-    pytest-monkeytype = "*"
-    pytest-mypy = "*"
-    pytest-print = "*"
-    pytest-sugar = "*"
-    pytest-xdist = "*"
+# formatting
+black = "19.10b0"
+blacken-docs = "*"
+isort = "*"
 
-    # pre-commit
-    pre-commit = "*"
-    pygments-pre-commit = "*"
+# testing
+tox = "*"
 
-    # other
-    radon = "*"
-    cohesion = "*"
-    vulture = "*"
-    flynt = "^0.35.0"
-    pytest-annotate = "^1.0"
+# pre-commit
+pre-commit = "*"
+pygments-pre-commit = "*"
+
+# other
+radon = "*"
+cohesion = "*"
+vulture = "*"
+flynt = "*"
 
 [tool.isort]
 line_length = 88
@@ -60,15 +54,24 @@ known_third_party = []
 
 [tool.black]
 line-length = 88
-target_version = ['py38']
+target_version = ['py36']
 
-[tool.pytest]
-addopts = "--mypy"
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py36,py37,py38
+
+[testenv]
+commands =
+  nosetests {posargs:tests}
+deps =
+  nose
+  nose_parameterized
+"""
 
 [flake8]
-ignore = ['D100','D101','D102','D103','D107','Q000','Z306']
-exclude = ['.git','__pycache__','docs/source/conf.py','old','build','dist']
-max-complexity = 10
+ignore = ",E203,D100,D101,D102,D103,D104,D105,D106,D107,D203,W503,"
+exclude = ",.git, .venv, lib/client, __pycache__,"
 max-line-length = 88
 
 [mypy]
