@@ -1,0 +1,56 @@
+[tool]
+[tool.poetry]
+name = "case-conversion"
+version = "3.0.0"
+description = "Convert between different types of cases (unicode supported)"
+license = "MIT"
+authors = ["Alejandro Frias <joker454@gmail.com>"]
+keywords = ["case", "convert", "conversion", "camel", "pascal", "snake", "kebab", "spinal", "unicode"]
+repository = "https://github.com/AlejandroFrias/case-conversion"
+readme = "README.md"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/AlejandroFrias/case-conversion/issues"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+regex = ">=2016.2.25"
+
+[tool.poetry.dev-dependencies]
+# linting
+flake8 = "*"
+
+# formatting
+black = "19.10b0"
+blacken-docs = "*"
+isort = "*"
+
+# testing
+tox = "*"
+
+[tool.isort]
+line_length = 88
+combine_star = true
+known_third_party = []
+
+[tool.black]
+line-length = 88
+target_version = ['py36']
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py36,py37,py38
+
+[testenv]
+commands =
+  nosetests {posargs:tests}
+deps =
+  nose
+  nose_parameterized
+"""
+
+[flake8]
+ignore = ",W503,"
+exclude = ",.git, .venv, lib/client, __pycache__,"
+max-line-length = 88
