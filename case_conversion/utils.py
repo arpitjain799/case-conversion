@@ -105,26 +105,23 @@ def advanced_acronym_detection(
     Return last index of new word groups.
     """
     # Combine each letter into single string.
-    acstr = "".join(words[s:i])
+    acr_str = "".join(words[s:i])
 
     # List of ranges representing found acronyms.
     range_list: List[Tuple[int, int]] = []
     # Set of remaining letters.
-    not_range = set(range(len(acstr)))
+    not_range = set(range(len(acr_str)))
 
-    # Search for each acronym in acstr.
-    for acronym in acronyms:
-        for (a, b) in get_rubstring_ranges(acstr, acronym):
+    # Search for each acronym in acr_str.
+    for acr in acronyms:
+        for (start, end) in get_rubstring_ranges(acr_str, acr):
             # Make sure found acronym doesn't overlap with others.
-            ok = True
             for r in range_list:
-                if a < r[1] and b > r[0]:
-                    ok = False
+                if start < r[1] and end > r[0]:
                     break
-
-            if ok:
-                range_list.append((a, b))
-                for j in range(a, b):
+            else:
+                range_list.append((start, end))
+                for j in range(start, end):
                     not_range.remove(j)
 
     # Add remaining letters as ranges.
