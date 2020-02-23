@@ -6,6 +6,7 @@ This is a port of the [CaseConversion Sublime Plugin](https://github.com/jdc0589
 - Autodetection of case (no need to specify explicitly which case you are converting from!)
 - Unicode supported (non-ASCII characters for days!)
 - Acronym detection (no funky splitting on every capital letter of an all caps acronym like `HTTPError`!)
+- Dependency free!
 - And obviously case conversions from/to the following types of cases:
   - `camelcase`
   - `pascalcase`
