@@ -2,7 +2,7 @@
 """Unit test for case-conversion
 """
 
-import case_conversion
+from case_conversion import CaseConverter
 from unittest import TestCase
 from parameterized import parameterized
 
