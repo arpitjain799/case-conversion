@@ -49,6 +49,19 @@ def test_simple_acronym_detection(s, i, words, expected):
 
 
 @pytest.mark.parametrize(
+    "s,i,words,acronyms,expected",
+    (
+        # TODO: Add more cases
+        (0, 1, ["FOO", "bar"], ("FOO",), 0),
+        (0, 1, ["FOO", "bar"], ("BAR",), 2),
+    )
+)
+def test_advanced_acronym_detection(s, i, words, acronyms, expected):
+    assert CaseConverter._advanced_acronym_detection(s, i, words, acronyms) == expected
+
+
+
+@pytest.mark.parametrize(
     "acronyms",
     (
         "HT-TP", "NA SA", "SU.GAR"
