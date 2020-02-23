@@ -41,6 +41,6 @@ line-length = 88
 target_version = ['py36']
 
 [flake8]
-ignore = ",W503,"
+ignore = ",E203,W503,"
 exclude = ",.git, .venv, lib/client, __pycache__,"
 max-line-length = 88
