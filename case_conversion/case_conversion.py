@@ -3,6 +3,7 @@ from typing import cast, Any, Iterator, List, Optional, Tuple, Union
 import unicodedata
 from enum import Enum, unique
 
+from .alias import alias, aliased
 
 def _get_rubstring_ranges(a_str: str, sub: str) -> Iterator[Tuple[int, int]]:
     start = 0
@@ -46,40 +47,6 @@ def _is_valid_acronym(a_string: str) -> bool:
             return False
 
     return True
-
-
-def aliased(klass):
-    """
-    Use in combination with `@alias` decorator.
-
-    Classes decorated with @aliased will have their aliased methods
-    (via @alias) actually aliased.
-    """
-    methods = klass.__dict__.copy()
-    for method in methods.values():
-        if hasattr(method, "_aliases"):
-            # add aliases but don't override attributes of 'klass'
-            try:
-                for alias in method._aliases - set(methods):
-                    setattr(klass, alias, method)
-            except TypeError:
-                pass
-    return klass
-
-
-class alias(object):
-    """
-    Decorator for aliasing method names.
-
-    Only works within classes decorated with '@aliased'
-    """
-
-    def __init__(self, *aliases):
-        self.aliases = set(aliases)
-
-    def __call__(self, f):
-        f._aliases = self.aliases
-        return f
 
 
 class InvalidAcronymError(Exception):
