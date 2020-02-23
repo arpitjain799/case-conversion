@@ -38,7 +38,7 @@ def is_upper(a_string: str) -> bool:
 
 
 def is_valid_acronym(a_string: str) -> bool:
-    if len(a_string) == 0:
+    if not a_string:
         return False
 
     for a_char in a_string:
