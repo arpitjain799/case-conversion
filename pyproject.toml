@@ -34,6 +34,9 @@ mypy = "^0.761"
 [tool.isort]
 line_length = 88
 combine_star = true
+# interoperability with black
+include_trailing_comma = true
+multi_line_output = 3
 known_third_party = []
 
 [tool.black]

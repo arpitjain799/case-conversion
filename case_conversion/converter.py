@@ -1,16 +1,16 @@
 from typing import List, Optional, Tuple
 
 from .alias import alias, aliased
-from .utils import (
-    segment_string,
-    sanitize_acronyms,
-    determine_case,
-    normalize_words,
-    advanced_acronym_detection,
-    simple_acronym_detection,
-    is_upper,
-)
 from .types import Case
+from .utils import (
+    advanced_acronym_detection,
+    determine_case,
+    is_upper,
+    normalize_words,
+    sanitize_acronyms,
+    segment_string,
+    simple_acronym_detection,
+)
 
 
 @aliased
