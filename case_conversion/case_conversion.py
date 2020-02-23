@@ -1,15 +1,55 @@
 import sys
-
-import regex
+import unicodedata
 
 PYTHON2 = sys.version_info[0] < 3
 if not PYTHON2:
     xrange = range
     unicode = str
 
-UPPER = regex.compile(u'^[\p{Lu}]$')
-SEP = regex.compile(u'^[^\p{Ll}\p{Lu}\p{Nd}]$')
-NOTSEP = regex.compile(u'^[\p{Ll}\p{Lu}\p{Nd}]$')
+def _get_rubstring_ranges(a_str, sub):
+    start = 0
+    sub_len = len(sub)
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1:
+            return
+        yield (start, start + sub_len)
+        start += 1
+
+
+def _char_is_sep(a_char):
+    return (
+        not _char_is_upper(a_char)
+        and not _char_is_lower(a_char)
+        and not _char_is_decimal(a_char)
+    )
+
+
+def _char_is_decimal(a_char):
+    return unicodedata.category(a_char) == "Nd"
+
+
+def _char_is_lower(a_char):
+    return unicodedata.category(a_char) == "Ll"
+
+
+def _char_is_upper(a_char):
+    return unicodedata.category(a_char) == "Lu"
+
+
+def _is_upper(a_string):
+    return len(a_string) == 1 and _char_is_upper(a_string)
+
+
+def _is_valid_acronym(a_string):
+    if len(a_string) == 0:
+        return False
+
+    for a_char in a_string:
+        if _char_is_sep(a_char):
+            return False
+
+    return True
 
 
 def aliased(klass):
@@ -107,15 +147,14 @@ class CaseConverter(object):
         return case_type
 
     @staticmethod
-    def _advanced_acronym_detection(s, i, words, acronyms):
-        """
-        Detect acronyms by checking against a list of acronyms.
+    def _advanced_acronym_detection(s: int, i: int, words, acronyms):
+        """Detect acronyms by checking against a list of acronyms.
 
         Check a run of words represented by the range [s, i].
         Return last index of new word groups.
         """
         # Combine each letter into single string.
-        acstr = ''.join(words[s:i])
+        acstr = "".join(words[s:i])
 
         # List of ranges representing found acronyms.
         range_list = []
@@ -124,19 +163,7 @@ class CaseConverter(object):
 
         # Search for each acronym in acstr.
         for acronym in acronyms:
-            rac = regex.compile(unicode(acronym))
-
-            # Loop until all instances of the acronym are found,
-            # instead of just the first.
-            n = 0
-            while True:
-                m = rac.search(acstr, n)
-                if not m:
-                    break
-
-                a, b = m.start(), m.end()
-                n = b
-
+            for (a, b) in _get_rubstring_ranges(acstr, acronym):
                 # Make sure found acronym doesn't overlap with others.
                 ok = True
                 for r in range_list:
@@ -146,7 +173,7 @@ class CaseConverter(object):
 
                 if ok:
                     range_list.append((a, b))
-                    for j in xrange(a, b):
+                    for j in range(a, b):
                         not_range.remove(j)
 
         # Add remaining letters as ranges.
@@ -158,13 +185,13 @@ class CaseConverter(object):
         range_list.sort()
 
         # Remove original letters in word list.
-        for _ in xrange(s, i):
+        for _ in range(s, i):
             del words[s]
 
         # Replace them with new word grouping.
-        for j in xrange(len(range_list)):
+        for j in range(len(range_list)):
             r = range_list[j]
-            words.insert(s + j, acstr[r[0]:r[1]])
+            words.insert(s + j, acstr[r[0] : r[1]])
 
         return s + len(range_list) - 1
 
@@ -185,16 +212,14 @@ class CaseConverter(object):
 
     @staticmethod
     def _sanitize_acronyms(unsafe_acronyms):
-        """
-        Check acronyms against regex.
+        """Normalize valid acronyms to upper-case.
 
-        Normalize valid acronyms to upper-case.
-        If an invalid acronym is encountered raise InvalidAcronymError.
+        If an invalid acronym is encountered (contains separators)
+        raise InvalidAcronymError.
         """
-        valid_acronym = regex.compile(u'^[\p{Ll}\p{Lu}\p{Nd}]+$')
         acronyms = []
         for a in unsafe_acronyms:
-            if valid_acronym.match(a):
+            if _is_valid_acronym(a):
                 acronyms.append(a.upper())
             else:
                 raise InvalidAcronymError(a)
@@ -216,17 +241,14 @@ class CaseConverter(object):
 
     @classmethod
     def _segment_string(cls, string):
-        """
-        Segment string on separator into list of words.
+        """Segment string on separator into list of words.
 
         Arguments:
             string -- the string we want to process
-
         Returns:
             words -- list of words the string got minced to
             separator -- the separator char intersecting words
             was_upper -- whether string happened to be upper-case
-
         """
         words = []
         separator = ""
@@ -249,18 +271,17 @@ class CaseConverter(object):
         # Iterate over each character, checking for boundaries, or places
         # where the stringiable should divided.
         while curr_i <= len(string):
-            char = string[curr_i:curr_i + 1]
-
+            char = string[curr_i : curr_i + 1]
             split = False
             if curr_i < len(string):
                 # Detect upper-case letter as boundary.
-                if UPPER.match(char):
+                if _char_is_upper(char):
                     split = True
                 # Detect transition from separator to not separator.
-                elif NOTSEP.match(char) and SEP.match(prev_i):
+                elif not _char_is_sep(char) and _char_is_sep(prev_i):
                     split = True
                 # Detect transition not separator to separator.
-                elif SEP.match(char) and NOTSEP.match(prev_i):
+                elif _char_is_sep(char) and not _char_is_sep(prev_i):
                     split = True
             else:
                 # The looprev_igoes one extra iteration so that it can
@@ -268,13 +289,13 @@ class CaseConverter(object):
                 split = True
 
             if split:
-                if NOTSEP.match(prev_i):
+                if not _char_is_sep(prev_i):
                     words.append(string[seq_i:curr_i])
                 else:
                     # stringiable contains at least one separator.
                     # Use the first one as the stringiable's primary separator.
                     if not separator:
-                        separator = string[seq_i:seq_i + 1]
+                        separator = string[seq_i : seq_i + 1]
 
                     # Use None to indicate a separator in the word list.
                     words.append(None)
@@ -329,7 +350,7 @@ class CaseConverter(object):
         # Find runs of single upper-case letters.
         while i < len(words):
             word = words[i]
-            if word is not None and UPPER.match(word):
+            if word is not None and _is_upper(word):
                 if s is None:
                     s = i
             elif s is not None:

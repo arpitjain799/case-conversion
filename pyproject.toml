@@ -14,7 +14,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-regex = ">=2016.2.25"
 
 [tool.poetry.dev-dependencies]
 # linting
