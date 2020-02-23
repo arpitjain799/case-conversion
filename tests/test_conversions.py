@@ -450,9 +450,3 @@ class CaseConversionTest(TestCase):
         case_converter = getattr(CaseConverter, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
-
-
-if __name__ == "__main__":
-    from unittest import main
-
-    main()
