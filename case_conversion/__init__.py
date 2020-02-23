@@ -1,2 +1,2 @@
-from .converter import CaseConverter
-from .types import Case, InvalidAcronymError
+from .converter import CaseConverter  # noqa
+from .types import Case, InvalidAcronymError  # noqa

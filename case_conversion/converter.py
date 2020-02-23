@@ -1,7 +1,4 @@
-import sys
-from typing import cast, Any, Iterator, List, Optional, Tuple, Union
-import unicodedata
-
+from typing import List, Optional, Tuple
 
 from .alias import alias, aliased
 from .utils import (
@@ -13,7 +10,7 @@ from .utils import (
     _simple_acronym_detection,
     _is_upper,
 )
-from .types import Case, InvalidAcronymError
+from .types import Case
 
 
 @aliased
@@ -30,7 +27,8 @@ class CaseConverter(object):
         """
         Parse a stringiable into a list of words.
 
-        Also returns the case type, which can be one of the following:
+        Also returns the case type, which can be one of
+        the following:
             - upper: All words are upper-case.
             - lower: All words are lower-case.
             - pascal: All words are title-case or upper-case. Note that the

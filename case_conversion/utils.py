@@ -1,5 +1,5 @@
 import unicodedata
-from typing import cast, Any, Iterator, List, Optional, Tuple, Union
+from typing import Iterator, List, Optional, Tuple, Union
 
 from .types import Case, InvalidAcronymError
 
