@@ -73,6 +73,15 @@ def test_parse_case(string, acronyms, preserve_case, expected):
     assert CaseConverter.parse_case(string, acronyms, preserve_case) == expected
 
 
+def test_invalid_acronym_error_message():
+    acronym = "BadAcronym"
+    msg = "Case Conversion: acronym '{}' is invalid.".format(acronym)
+    try:
+        raise InvalidAcronymError(acronym)
+    except InvalidAcronymError as e:
+        assert msg in str(e)
+
+
 @pytest.mark.parametrize(
     "acronyms",
     (
