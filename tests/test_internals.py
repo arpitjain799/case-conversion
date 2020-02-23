@@ -1,6 +1,6 @@
 import pytest
 
-from case_conversion import CaseConverter
+from case_conversion import CaseConverter, InvalidAcronymError
 
 @pytest.mark.parametrize(
     "string,expected",
@@ -34,3 +34,14 @@ def test_segment_string(string, expected):
 )
 def test_sanitize_acronyms(acronyms, expected):
     assert CaseConverter._sanitize_acronyms(acronyms) == expected
+
+
+@pytest.mark.parametrize(
+    "acronyms",
+    (
+        "HT-TP", "NA SA", "SU.GAR"
+    )
+)
+def test_sanitize_acronyms_raises_on_invalid_acronyms(acronyms):
+    with pytest.raises(InvalidAcronymError):
+        CaseConverter._sanitize_acronyms(acronyms)
