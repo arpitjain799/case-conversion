@@ -7,6 +7,7 @@ This is a port of the [CaseConversion Sublime Plugin](https://github.com/jdc0589
 - Unicode supported (non-ASCII characters for days!)
 - Acronym detection (no funky splitting on every capital letter of an all caps acronym like `HTTPError`!)
 - Dependency free!
+- Supports Python 3.6+
 - And obviously case conversions from/to the following types of cases:
   - `camelcase`
   - `pascalcase`
@@ -20,7 +21,6 @@ This is a port of the [CaseConversion Sublime Plugin](https://github.com/jdc0589
   - `separate_words`
   - `slashcase`
   - `backslashcase`
-- Oh! Python2 and Python3 supported!
 
 
 ##### Usage

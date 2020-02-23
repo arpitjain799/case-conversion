@@ -1,10 +1,6 @@
 import sys
 import unicodedata
 
-PYTHON2 = sys.version_info[0] < 3
-if not PYTHON2:
-    xrange = range
-    unicode = str
 
 def _get_rubstring_ranges(a_str, sub):
     start = 0
@@ -202,7 +198,7 @@ class CaseConverter(object):
         acronym = ''.join(words[s:i])
 
         # Remove original letters in word list.
-        for _ in xrange(s, i):
+        for _ in range(s, i):
             del words[s]
 
         # Replace them with new word grouping.
