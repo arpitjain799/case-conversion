@@ -20,3 +20,17 @@ from case_conversion import CaseConverter
 )
 def test_segment_string(string, expected):
     assert CaseConverter._segment_string(string) == expected
+
+
+@pytest.mark.parametrize(
+    "acronyms,expected",
+    (
+        (("http",), ["HTTP"]),
+        (("HTTP",), ["HTTP"],),
+        (("Http",), ["HTTP"],),
+        (("httP",), ["HTTP"],),
+        (("http", "Nasa"), ["HTTP", "NASA"]),
+    )
+)
+def test_sanitize_acronyms(acronyms, expected):
+    assert CaseConverter._sanitize_acronyms(acronyms) == expected
