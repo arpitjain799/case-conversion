@@ -247,32 +247,32 @@ class CaseConverter(object):
     @alias("camel_snake")
     @classmethod
     def ada(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
-        r"""Return text in Ada_Case style."""
+        """Return text in Ada_Case style."""
         words, _case, _sep = cls.parse_case(text, acronyms)
         return "_".join([w.capitalize() for w in words])
 
     @classmethod
     def title(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
-        r"""Return text in Title_case style."""
+        """Return text in Title_case style."""
         return cls.snake(text, acronyms).capitalize()
 
     @classmethod
     def lower(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
-        r"""Return text in lowercase style."""
+        """Return text in lowercase style."""
         return text.lower()
 
     @classmethod
     def upper(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
-        r"""Return text in UPPERCASE style."""
+        """Return text in UPPERCASE style."""
         return text.upper()
 
     @classmethod
     def capital(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
-        r"""Return text in UPPERCASE style."""
+        """Return text in UPPERCASE style."""
         return text.capitalize()
 
     @classmethod
     def http_header(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
-        r"""Return text in Http-Header-Case style."""
+        """Return text in Http-Header-Case style."""
         words, _case, _sep = cls.parse_case(text, acronyms)
         return "-".join([w.capitalize() for w in words])
