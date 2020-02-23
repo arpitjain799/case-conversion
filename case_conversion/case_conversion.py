@@ -204,7 +204,7 @@ class CaseConverter(object):
     @staticmethod
     def _normalize_words(words, acronyms):
         """Normalize case of each word to PascalCase."""
-        for i, _ in enumerate(words):
+        for i, _ in enumerate(words):  # TODO: Rewrite loop without enumerate
             # if detect_acronyms:
             if words[i].upper() in acronyms:
                 # Convert known acronyms to upper-case.

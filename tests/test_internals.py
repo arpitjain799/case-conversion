@@ -45,3 +45,16 @@ def test_sanitize_acronyms(acronyms, expected):
 def test_sanitize_acronyms_raises_on_invalid_acronyms(acronyms):
     with pytest.raises(InvalidAcronymError):
         CaseConverter._sanitize_acronyms(acronyms)
+
+
+@pytest.mark.parametrize(
+    "words,acronyms,expected",
+    (
+        (["foobar"], (), ["Foobar"]),
+        (["fooBar"], (), ["Foobar"]),
+        (["FooBar"], (), ["Foobar"]),
+        (["Foo", "Bar"], ("BAR"), ["Foo", "BAR"]),
+    )
+)
+def test_normalize_words(words, acronyms, expected):
+    assert CaseConverter._normalize_words(words, acronyms) == expected
