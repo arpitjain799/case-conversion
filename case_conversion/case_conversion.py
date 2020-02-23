@@ -1,6 +1,7 @@
 import sys
 from typing import cast, Any, Iterator, List, Optional, Tuple, Union
 import unicodedata
+from enum import Enum, unique
 
 
 def _get_rubstring_ranges(a_str: str, sub: str) -> Iterator[Tuple[int, int]]:
@@ -89,12 +90,31 @@ class InvalidAcronymError(Exception):
         super().__init__(msg)
 
 
+@unique
+class Case(Enum):
+    # - upper: All words are upper-case.
+    # - lower: All words are lower-case.
+    # - pascal: All words are title-case or upper-case. Note that the
+    #           stringiable may still have separators.
+    # - camel: First word is lower-case, the rest are title-case or
+    #          upper-case. stringiable may still have separators.
+    # - mixed: Any other mixing of word casing. Never occurs if there are
+    #          no separators.
+    # - unknown: stringiable contains no words.
+    UNKOWN = "unknown"
+    UPPER = "upper"
+    LOWER = "lower"
+    CAMEL = "camel"
+    PASCAL = "pascal"
+    MIXED = "mixed"
+
+
 @aliased
 class CaseConverter(object):
     """Main Class."""
 
     @staticmethod
-    def _determine_case(was_upper: bool, words: List[str], string: str) -> str:
+    def _determine_case(was_upper: bool, words: List[str], string: str) -> Case:
         """
         Determine case type of string.
 
@@ -115,11 +135,11 @@ class CaseConverter(object):
             - unknown: stringiable contains no words.
 
         """
-        case_type = "unknown"
+        case_type = Case.UNKOWN
         if was_upper:
-            case_type = "upper"
+            case_type = Case.UPPER
         elif string.islower():
-            case_type = "lower"
+            case_type = Case.LOWER
         elif words:
             camel_case = words[0].islower()
             pascal_case = words[0].istitle() or words[0].isupper()
@@ -133,11 +153,11 @@ class CaseConverter(object):
                         break
 
             if camel_case:
-                case_type = "camel"
+                case_type = Case.CAMEL
             elif pascal_case:
-                case_type = "pascal"
+                case_type = Case.PASCAL
             else:
-                case_type = "mixed"
+                case_type = Case.MIXED
 
         return case_type
 
@@ -317,7 +337,7 @@ class CaseConverter(object):
         string: str,
         acronyms: Optional[List[str]] = None,
         preserve_case: bool = False,
-    ) -> Tuple[List[str], str, str]:
+    ) -> Tuple[List[str], Case, str]:
         """
         Parse a stringiable into a list of words.
 

@@ -1,6 +1,6 @@
 import pytest
 
-from case_conversion import CaseConverter, InvalidAcronymError
+from case_conversion import Case, CaseConverter, InvalidAcronymError
 
 @pytest.mark.parametrize(
     "string,expected",
@@ -63,10 +63,10 @@ def test_advanced_acronym_detection(s, i, words, acronyms, expected):
 @pytest.mark.parametrize(
     "string,acronyms,preserve_case,expected",
     (
-        ("fooBarBaz", None, False, (["Foo", "Bar", "Baz"], "camel", "")),
-        ("fooBarBaz", None, True, (["foo", "Bar", "Baz"], "camel", "")),
-        ("fooBarBaz", ("BAR",), False, (["Foo", "BAR", "Baz"], "camel", "")),
-        ("fooBarBaz", ("BAR",), True, (["foo", "Bar", "Baz"], "camel", "")),
+        ("fooBarBaz", None, False, (["Foo", "Bar", "Baz"], Case.CAMEL, "")),
+        ("fooBarBaz", None, True, (["foo", "Bar", "Baz"], Case.CAMEL, "")),
+        ("fooBarBaz", ("BAR",), False, (["Foo", "BAR", "Baz"], Case.CAMEL, "")),
+        ("fooBarBaz", ("BAR",), True, (["foo", "Bar", "Baz"], Case.CAMEL, "")),
     )
 )
 def test_parse_case(string, acronyms, preserve_case, expected):
@@ -109,12 +109,12 @@ def test_normalize_words(words, acronyms, expected):
 @pytest.mark.parametrize(
     "was_upper,words,string,expected",
     (
-        (False, [], "", "unknown"),
-        (True, [], "", "upper"),
-        (False, [], "foobar", "lower"),
-        (False, ["foo", "Bar"], "", "camel"),
-        (False, ["Foo", "Bar"], "", "pascal"),
-        (False, ["foo", "bar"], "", "mixed"),
+        (False, [], "", Case.UNKOWN),
+        (True, [], "", Case.UPPER),
+        (False, [], "foobar", Case.LOWER),
+        (False, ["foo", "Bar"], "", Case.CAMEL),
+        (False, ["Foo", "Bar"], "", Case.PASCAL),
+        (False, ["foo", "bar"], "", Case.MIXED),
     )
 )
 def test_determine_case(was_upper, words, string, expected):

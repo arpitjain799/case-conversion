@@ -5,4 +5,4 @@
 #     constcase, screaming_snakecase, dotcase, separate_words, slashcase,
 #     backslashcase)
 
-from .case_conversion import CaseConverter, InvalidAcronymError
+from .case_conversion import Case, CaseConverter, InvalidAcronymError
