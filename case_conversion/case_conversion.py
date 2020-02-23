@@ -6,7 +6,7 @@ if not PYTHON2:
     xrange = range
     unicode = str
 
-def _getSubstringRanges(a_str, sub):
+def _get_rubstring_ranges(a_str, sub):
     start = 0
     subLen = len(sub)
     while True:
@@ -17,36 +17,36 @@ def _getSubstringRanges(a_str, sub):
         start += 1
 
 
-def _charIsSep(aChar):
+def _char_is_sep(aChar):
     return (
-        not _charIsUpper(aChar)
-        and not _charIsLower(aChar)
-        and not _charIsNumberDecimalDigit(aChar)
+        not _char_is_upper(aChar)
+        and not _char_is_lower(aChar)
+        and not _char_is_decimal(aChar)
     )
 
 
-def _charIsNumberDecimalDigit(aChar):
+def _char_is_decimal(aChar):
     return unicodedata.category(aChar) == "Nd"
 
 
-def _charIsLower(aChar):
+def _char_is_lower(aChar):
     return unicodedata.category(aChar) == "Ll"
 
 
-def _charIsUpper(aChar):
+def _char_is_upper(aChar):
     return unicodedata.category(aChar) == "Lu"
 
 
-def _isUpper(aString):
-    return len(aString) == 1 and _charIsUpper(aString)
+def _is_upper(aString):
+    return len(aString) == 1 and _char_is_upper(aString)
 
 
-def _isValidAcronym(aString):
+def _is_valid_acronym(aString):
     if len(aString) == 0:
         return False
 
     for aChar in aString:
-        if _charIsSep(aChar):
+        if _char_is_sep(aChar):
             return False
 
     return True
@@ -163,7 +163,7 @@ class CaseConverter(object):
 
         # Search for each acronym in acstr.
         for acronym in acronyms:
-            for (a, b) in _getSubstringRanges(acstr, acronym):
+            for (a, b) in _get_rubstring_ranges(acstr, acronym):
                 # Make sure found acronym doesn't overlap with others.
                 ok = True
                 for r in range_list:
@@ -219,7 +219,7 @@ class CaseConverter(object):
         """
         acronyms = []
         for a in unsafe_acronyms:
-            if _isValidAcronym(a):
+            if _is_valid_acronym(a):
                 acronyms.append(a.upper())
             else:
                 raise InvalidAcronymError(a)
@@ -275,13 +275,13 @@ class CaseConverter(object):
             split = False
             if curr_i < len(string):
                 # Detect upper-case letter as boundary.
-                if _charIsUpper(char):
+                if _char_is_upper(char):
                     split = True
                 # Detect transition from separator to not separator.
-                elif not _charIsSep(char) and _charIsSep(prev_i):
+                elif not _char_is_sep(char) and _char_is_sep(prev_i):
                     split = True
                 # Detect transition not separator to separator.
-                elif _charIsSep(char) and not _charIsSep(prev_i):
+                elif _char_is_sep(char) and not _char_is_sep(prev_i):
                     split = True
             else:
                 # The looprev_igoes one extra iteration so that it can
@@ -289,7 +289,7 @@ class CaseConverter(object):
                 split = True
 
             if split:
-                if not _charIsSep(prev_i):
+                if not _char_is_sep(prev_i):
                     words.append(string[seq_i:curr_i])
                 else:
                     # stringiable contains at least one separator.
@@ -350,7 +350,7 @@ class CaseConverter(object):
         # Find runs of single upper-case letters.
         while i < len(words):
             word = words[i]
-            if word is not None and _isUpper(word):
+            if word is not None and _is_upper(word):
                 if s is None:
                     s = i
             elif s is not None:
