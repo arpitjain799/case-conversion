@@ -48,12 +48,12 @@ def is_valid_acronym(a_string: str) -> bool:
     return True
 
 
-def determine_case(was_upper: bool, words: List[str], string: str) -> Case:
+def determine_case(was_all_upper: bool, words: List[str], string: str) -> Case:
     """
     Determine case type of string.
 
     Arguments:
-        was_upper {[type]} -- [description]
+        was_all_upper {[type]} -- [description]
         words {[type]} -- [description]
         string {[type]} -- [description]
 
@@ -70,7 +70,7 @@ def determine_case(was_upper: bool, words: List[str], string: str) -> Case:
 
     """
     case_type = Case.UNKOWN
-    if was_upper:
+    if was_all_upper:
         case_type = Case.UPPER
     elif string.islower():
         case_type = Case.LOWER
