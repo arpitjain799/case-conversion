@@ -26,7 +26,10 @@ blacken-docs = "*"
 isort = "*"
 
 # testing
-tox = "*"
+parameterized = "^0.7.1"
+pytest = "^5.3.5"
+pytest-cov = "^2.8.1"
+pytest-sugar = "^0.9.2"
 
 [tool.isort]
 line_length = 88
@@ -36,19 +39,6 @@ known_third_party = []
 [tool.black]
 line-length = 88
 target_version = ['py36']
-
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = py36,py37,py38
-
-[testenv]
-commands =
-  nosetests {posargs:tests}
-deps =
-  nose
-  nose_parameterized
-"""
 
 [flake8]
 ignore = ",W503,"

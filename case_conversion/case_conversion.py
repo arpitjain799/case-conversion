@@ -50,9 +50,8 @@ class InvalidAcronymError(Exception):
     """Raise when acronym fails validation."""
 
     def __init__(self, acronym):
-        super(InvalidAcronymError, self).__init__()
-        m = "Case Conversion: acronym '{}' is invalid."
-        print(m.format(acronym))
+        msg = "Case Conversion: acronym '{}' is invalid.".format(acronym)
+        super().__init__(msg)
 
 
 @aliased
@@ -86,7 +85,7 @@ class CaseConverter(object):
             case_type = 'upper'
         elif string.islower():
             case_type = 'lower'
-        elif len(words) > 0:
+        elif words:
             camel_case = words[0].islower()
             pascal_case = words[0].istitle() or words[0].isupper()
 
@@ -204,7 +203,7 @@ class CaseConverter(object):
     @staticmethod
     def _normalize_words(words, acronyms):
         """Normalize case of each word to PascalCase."""
-        for i, _ in enumerate(words):
+        for i, _ in enumerate(words):  # TODO: Rewrite loop without enumerate
             # if detect_acronyms:
             if words[i].upper() in acronyms:
                 # Convert known acronyms to upper-case.
