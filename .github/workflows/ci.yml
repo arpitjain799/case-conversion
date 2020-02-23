@@ -20,6 +20,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install poetry
         poetry install --no-root
+    - name: Run flake8
+      run: |
+        poetry run flake8 . --config pyproject.toml
     - name: Run mypy
       run: |
         poetry run mypy ./case_conversion
