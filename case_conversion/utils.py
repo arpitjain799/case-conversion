@@ -142,7 +142,7 @@ def advanced_acronym_detection(
     # Replace them with new word grouping.
     for j in range(len(range_list)):
         r = range_list[j]
-        words.insert(s + j, acstr[r[0] : r[1]])
+        words.insert(s + j, acr_str[r[0] : r[1]])
 
     return s + len(range_list) - 1
 
@@ -150,14 +150,14 @@ def advanced_acronym_detection(
 def simple_acronym_detection(s: int, i: int, words: List[str], *args) -> int:
     """Detect acronyms based on runs of upper-case letters."""
     # Combine each letter into a single string.
-    acstr = "".join(words[s:i])
+    acr_str = "".join(words[s:i])
 
     # Remove original letters in word list.
     for _ in range(s, i):
         del words[s]
 
     # Replace them with new word grouping.
-    words.insert(s, "".join(acstr))
+    words.insert(s, "".join(acr_str))
 
     return s
 
@@ -171,11 +171,11 @@ def sanitize_acronyms(
     raise InvalidAcronymError.
     """
     acronyms = []
-    for a in unsafe_acronyms:
-        if is_valid_acronym(a):
-            acronyms.append(a.upper())
+    for acr in unsafe_acronyms:
+        if is_valid_acronym(acr):
+            acronyms.append(acr.upper())
         else:
-            raise InvalidAcronymError(a)
+            raise InvalidAcronymError(acr)
     return acronyms
 
 
