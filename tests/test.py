@@ -10,245 +10,245 @@ ACRONYMS = ['HTTP']
 ACRONYMS_UNICODE = [u'HÉÉP']
 
 CASES = [
-    'camelcase',
-    'pascalcase',
-    'snakecase',
-    'dashcase',
-    'spinalcase',
-    'kebabcase',
-    'constcase',
-    'screaming_snakecase',
-    'dotcase',
+    'camel',
+    'pascal',
+    'snake',
+    'dash',
+    'spinal',
+    'dash',
+    'const',
+    'const',
+    'dot',
 ]
 
 CASES_PRESERVE = [
     'separate_words',
-    'slashcase',
-    'backslashcase',
+    'slash',
+    'backslash',
 ]
 
 VALUES = {
-    'camelcase': 'fooBarString',
-    'pascalcase': 'FooBarString',
-    'snakecase': 'foo_bar_string',
-    'dashcase': 'foo-bar-string',
-    'spinalcase': 'foo-bar-string',
-    'kebabcase': 'foo-bar-string',
-    'constcase': 'FOO_BAR_STRING',
-    'screaming_snakecase': 'FOO_BAR_STRING',
-    'dotcase': 'foo.bar.string',
+    'camel': 'fooBarString',
+    'pascal': 'FooBarString',
+    'snake': 'foo_bar_string',
+    'dash': 'foo-bar-string',
+    'spinal': 'foo-bar-string',
+    'dash': 'foo-bar-string',
+    'const': 'FOO_BAR_STRING',
+    'const': 'FOO_BAR_STRING',
+    'dot': 'foo.bar.string',
     'separate_words': 'foo bar string',
-    'slashcase': 'foo/bar/string',
-    'backslashcase': 'foo\\bar\\string',
+    'slash': 'foo/bar/string',
+    'backslash': 'foo\\bar\\string',
 }
 
 VALUES_UNICODE = {
-    'camelcase': u'fóoBarString',
-    'pascalcase': u'FóoBarString',
-    'snakecase': u'fóo_bar_string',
-    'dashcase': u'fóo-bar-string',
-    'spinalcase': u'fóo-bar-string',
-    'kebabcase': u'fóo-bar-string',
-    'constcase': u'FÓO_BAR_STRING',
-    'screaming_snakecase': u'FÓO_BAR_STRING',
-    'dotcase': u'fóo.bar.string',
+    'camel': u'fóoBarString',
+    'pascal': u'FóoBarString',
+    'snake': u'fóo_bar_string',
+    'dash': u'fóo-bar-string',
+    'spinal': u'fóo-bar-string',
+    'dash': u'fóo-bar-string',
+    'const': u'FÓO_BAR_STRING',
+    'const': u'FÓO_BAR_STRING',
+    'dot': u'fóo.bar.string',
     'separate_words': u'fóo bar string',
-    'slashcase': u'fóo/bar/string',
-    'backslashcase': u'fóo\\bar\\string',
+    'slash': u'fóo/bar/string',
+    'backslash': u'fóo\\bar\\string',
 }
 
 VALUES_SINGLE = {
-    'camelcase': 'foo',
-    'pascalcase': 'Foo',
-    'snakecase': 'foo',
-    'dashcase': 'foo',
-    'spinalcase': 'foo',
-    'kebabcase': 'foo',
-    'constcase': 'FOO',
-    'screaming_snakecase': 'FOO',
-    'dotcase': 'foo',
+    'camel': 'foo',
+    'pascal': 'Foo',
+    'snake': 'foo',
+    'dash': 'foo',
+    'spinal': 'foo',
+    'dash': 'foo',
+    'const': 'FOO',
+    'const': 'FOO',
+    'dot': 'foo',
     'separate_words': 'foo',
-    'slashcase': 'foo',
-    'backslashcase': 'foo',
+    'slash': 'foo',
+    'backslash': 'foo',
 }
 
 VALUES_SINGLE_UNICODE = {
-    'camelcase': u'fóo',
-    'pascalcase': u'Fóo',
-    'snakecase': u'fóo',
-    'dashcase': u'fóo',
-    'spinalcase': u'fóo',
-    'kebabcase': u'fóo',
-    'constcase': u'FÓO',
-    'screaming_snakecase': u'FÓO',
-    'dotcase': u'fóo',
+    'camel': u'fóo',
+    'pascal': u'Fóo',
+    'snake': u'fóo',
+    'dash': u'fóo',
+    'spinal': u'fóo',
+    'dash': u'fóo',
+    'const': u'FÓO',
+    'const': u'FÓO',
+    'dot': u'fóo',
     'separate_words': u'fóo',
-    'slashcase': u'fóo',
-    'backslashcase': u'fóo',
+    'slash': u'fóo',
+    'backslash': u'fóo',
 }
 
 VALUES_ACRONYM = {
-    'camelcase': 'fooHTTPBarString',
-    'pascalcase': 'FooHTTPBarString',
-    'snakecase': 'foo_http_bar_string',
-    'dashcase': 'foo-http-bar-string',
-    'spinalcase': 'foo-http-bar-string',
-    'kebabcase': 'foo-http-bar-string',
-    'constcase': 'FOO_HTTP_BAR_STRING',
-    'screaming_snakecase': 'FOO_HTTP_BAR_STRING',
-    'dotcase': 'foo.http.bar.string',
+    'camel': 'fooHTTPBarString',
+    'pascal': 'FooHTTPBarString',
+    'snake': 'foo_http_bar_string',
+    'dash': 'foo-http-bar-string',
+    'spinal': 'foo-http-bar-string',
+    'dash': 'foo-http-bar-string',
+    'const': 'FOO_HTTP_BAR_STRING',
+    'const': 'FOO_HTTP_BAR_STRING',
+    'dot': 'foo.http.bar.string',
     'separate_words': 'foo http bar string',
-    'slashcase': 'foo/http/bar/string',
-    'backslashcase': 'foo\\http\\bar\\string',
+    'slash': 'foo/http/bar/string',
+    'backslash': 'foo\\http\\bar\\string',
 }
 
 VALUES_ACRONYM_UNICODE = {
-    'camelcase': u'fooHÉÉPBarString',
-    'pascalcase': u'FooHÉÉPBarString',
-    'snakecase': u'foo_héép_bar_string',
-    'dashcase': u'foo-héép-bar-string',
-    'spinalcase': u'foo-héép-bar-string',
-    'kebabcase': u'foo-héép-bar-string',
-    'constcase': u'FOO_HÉÉP_BAR_STRING',
-    'screaming_snakecase': u'FOO_HÉÉP_BAR_STRING',
-    'dotcase': u'foo.héép.bar.string',
+    'camel': u'fooHÉÉPBarString',
+    'pascal': u'FooHÉÉPBarString',
+    'snake': u'foo_héép_bar_string',
+    'dash': u'foo-héép-bar-string',
+    'spinal': u'foo-héép-bar-string',
+    'dash': u'foo-héép-bar-string',
+    'const': u'FOO_HÉÉP_BAR_STRING',
+    'const': u'FOO_HÉÉP_BAR_STRING',
+    'dot': u'foo.héép.bar.string',
     'separate_words': u'foo héép bar string',
-    'slashcase': u'foo/héép/bar/string',
-    'backslashcase': u'foo\\héép\\bar\\string',
+    'slash': u'foo/héép/bar/string',
+    'backslash': u'foo\\héép\\bar\\string',
 }
 
 PRESERVE_VALUES = {
-    'separate_words': {'camelcase': 'foo Bar String',
-                       'pascalcase': 'Foo Bar String',
-                       'constcase': 'FOO BAR STRING',
-                       'screaming_snakecase': 'FOO BAR STRING',
+    'separate_words': {'camel': 'foo Bar String',
+                       'pascal': 'Foo Bar String',
+                       'const': 'FOO BAR STRING',
+                       'const': 'FOO BAR STRING',
                        'default': 'foo bar string'},
-    'slashcase': {'camelcase': 'foo/Bar/String',
-                  'pascalcase': 'Foo/Bar/String',
-                  'constcase': 'FOO/BAR/STRING',
-                  'screaming_snakecase': 'FOO/BAR/STRING',
+    'slash': {'camel': 'foo/Bar/String',
+                  'pascal': 'Foo/Bar/String',
+                  'const': 'FOO/BAR/STRING',
+                  'const': 'FOO/BAR/STRING',
                   'default': 'foo/bar/string'},
-    'backslashcase': {'camelcase': 'foo\\Bar\\String',
-                      'pascalcase': 'Foo\\Bar\\String',
-                      'constcase': 'FOO\\BAR\\STRING',
-                      'screaming_snakecase': 'FOO\\BAR\\STRING',
+    'backslash': {'camel': 'foo\\Bar\\String',
+                      'pascal': 'Foo\\Bar\\String',
+                      'const': 'FOO\\BAR\\STRING',
+                      'const': 'FOO\\BAR\\STRING',
                       'default': 'foo\\bar\\string'},
 }
 
 PRESERVE_VALUES_UNICODE = {
-    'separate_words': {'camelcase': u'fóo Bar String',
-                       'pascalcase': u'Fóo Bar String',
-                       'constcase': u'FÓO BAR STRING',
-                       'screaming_snakecase': u'FÓO BAR STRING',
+    'separate_words': {'camel': u'fóo Bar String',
+                       'pascal': u'Fóo Bar String',
+                       'const': u'FÓO BAR STRING',
+                       'const': u'FÓO BAR STRING',
                        'default': u'fóo bar string'},
-    'slashcase': {'camelcase': u'fóo/Bar/String',
-                  'pascalcase': u'Fóo/Bar/String',
-                  'constcase': u'FÓO/BAR/STRING',
-                  'screaming_snakecase': u'FÓO/BAR/STRING',
+    'slash': {'camel': u'fóo/Bar/String',
+                  'pascal': u'Fóo/Bar/String',
+                  'const': u'FÓO/BAR/STRING',
+                  'const': u'FÓO/BAR/STRING',
                   'default': u'fóo/bar/string'},
-    'backslashcase': {'camelcase': u'fóo\\Bar\\String',
-                      'pascalcase': u'Fóo\\Bar\\String',
-                      'constcase': u'FÓO\\BAR\\STRING',
-                      'screaming_snakecase': u'FÓO\\BAR\\STRING',
+    'backslash': {'camel': u'fóo\\Bar\\String',
+                      'pascal': u'Fóo\\Bar\\String',
+                      'const': u'FÓO\\BAR\\STRING',
+                      'const': u'FÓO\\BAR\\STRING',
                       'default': u'fóo\\bar\\string'},
 }
 
 PRESERVE_VALUES_SINGLE = {
-    'separate_words': {'camelcase': 'foo',
-                       'pascalcase': 'Foo',
-                       'constcase': 'FOO',
-                       'screaming_snakecase': 'FOO',
+    'separate_words': {'camel': 'foo',
+                       'pascal': 'Foo',
+                       'const': 'FOO',
+                       'const': 'FOO',
                        'default': 'foo'},
-    'slashcase': {'camelcase': 'foo',
-                  'pascalcase': 'Foo',
-                  'constcase': 'FOO',
-                  'screaming_snakecase': 'FOO',
+    'slash': {'camel': 'foo',
+                  'pascal': 'Foo',
+                  'const': 'FOO',
+                  'const': 'FOO',
                   'default': 'foo'},
-    'backslashcase': {'camelcase': 'foo',
-                      'pascalcase': 'Foo',
-                      'constcase': 'FOO',
-                      'screaming_snakecase': 'FOO',
+    'backslash': {'camel': 'foo',
+                      'pascal': 'Foo',
+                      'const': 'FOO',
+                      'const': 'FOO',
                       'default': 'foo'},
 }
 
 PRESERVE_VALUES_SINGLE_UNICODE = {
-    'separate_words': {'camelcase': u'fóo',
-                       'pascalcase': u'Fóo',
-                       'constcase': u'FÓO',
-                       'screaming_snakecase': u'FÓO',
+    'separate_words': {'camel': u'fóo',
+                       'pascal': u'Fóo',
+                       'const': u'FÓO',
+                       'const': u'FÓO',
                        'default': u'fóo'},
-    'slashcase': {'camelcase': u'fóo',
-                  'pascalcase': u'Fóo',
-                  'constcase': u'FÓO',
-                  'screaming_snakecase': u'FÓO',
+    'slash': {'camel': u'fóo',
+                  'pascal': u'Fóo',
+                  'const': u'FÓO',
+                  'const': u'FÓO',
                   'default': u'fóo'},
-    'backslashcase': {'camelcase': u'fóo',
-                      'pascalcase': u'Fóo',
-                      'constcase': u'FÓO',
-                      'screaming_snakecase': u'FÓO',
+    'backslash': {'camel': u'fóo',
+                      'pascal': u'Fóo',
+                      'const': u'FÓO',
+                      'const': u'FÓO',
                       'default': u'fóo'},
 }
 
 PRESERVE_VALUES_ACRONYM = {
-    'separate_words': {'camelcase': 'foo HTTP Bar String',
-                       'pascalcase': 'Foo HTTP Bar String',
-                       'constcase': 'FOO HTTP BAR STRING',
-                       'screaming_snakecase': 'FOO HTTP BAR STRING',
+    'separate_words': {'camel': 'foo HTTP Bar String',
+                       'pascal': 'Foo HTTP Bar String',
+                       'const': 'FOO HTTP BAR STRING',
+                       'const': 'FOO HTTP BAR STRING',
                        'default': 'foo http bar string'},
-    'slashcase': {'camelcase': 'foo/HTTP/Bar/String',
-                  'pascalcase': 'Foo/HTTP/Bar/String',
-                  'constcase': 'FOO/HTTP/BAR/STRING',
-                  'screaming_snakecase': 'FOO/HTTP/BAR/STRING',
+    'slash': {'camel': 'foo/HTTP/Bar/String',
+                  'pascal': 'Foo/HTTP/Bar/String',
+                  'const': 'FOO/HTTP/BAR/STRING',
+                  'const': 'FOO/HTTP/BAR/STRING',
                   'default': 'foo/http/bar/string'},
-    'backslashcase': {'camelcase': 'foo\\HTTP\\Bar\\String',
-                      'pascalcase': 'Foo\\HTTP\\Bar\\String',
-                      'constcase': 'FOO\\HTTP\\BAR\\STRING',
-                      'screaming_snakecase': 'FOO\\HTTP\\BAR\\STRING',
+    'backslash': {'camel': 'foo\\HTTP\\Bar\\String',
+                      'pascal': 'Foo\\HTTP\\Bar\\String',
+                      'const': 'FOO\\HTTP\\BAR\\STRING',
+                      'const': 'FOO\\HTTP\\BAR\\STRING',
                       'default': 'foo\\http\\bar\\string'},
 }
 
 PRESERVE_VALUES_ACRONYM_UNICODE = {
-    'separate_words': {'camelcase': u'foo HÉÉP Bar String',
-                       'pascalcase': u'Foo HÉÉP Bar String',
-                       'constcase': u'FOO HÉÉP BAR STRING',
-                       'screaming_snakecase': u'FOO HÉÉP BAR STRING',
+    'separate_words': {'camel': u'foo HÉÉP Bar String',
+                       'pascal': u'Foo HÉÉP Bar String',
+                       'const': u'FOO HÉÉP BAR STRING',
+                       'const': u'FOO HÉÉP BAR STRING',
                        'default': u'foo héép bar string'},
-    'slashcase': {'camelcase': u'foo/HÉÉP/Bar/String',
-                  'pascalcase': u'Foo/HÉÉP/Bar/String',
-                  'constcase': u'FOO/HÉÉP/BAR/STRING',
-                  'screaming_snakecase': u'FOO/HÉÉP/BAR/STRING',
+    'slash': {'camel': u'foo/HÉÉP/Bar/String',
+                  'pascal': u'Foo/HÉÉP/Bar/String',
+                  'const': u'FOO/HÉÉP/BAR/STRING',
+                  'const': u'FOO/HÉÉP/BAR/STRING',
                   'default': u'foo/héép/bar/string'},
-    'backslashcase': {'camelcase': u'foo\\HÉÉP\\Bar\\String',
-                      'pascalcase': u'Foo\\HÉÉP\\Bar\\String',
-                      'constcase': u'FOO\\HÉÉP\\BAR\\STRING',
-                      'screaming_snakecase': u'FOO\\HÉÉP\\BAR\\STRING',
+    'backslash': {'camel': u'foo\\HÉÉP\\Bar\\String',
+                      'pascal': u'Foo\\HÉÉP\\Bar\\String',
+                      'const': u'FOO\\HÉÉP\\BAR\\STRING',
+                      'const': u'FOO\\HÉÉP\\BAR\\STRING',
                       'default': u'foo\\héép\\bar\\string'},
 }
 
 
 PRESERVE_VALUES_ACRONYM_SINGLE = {
-    'separate_words': {'camelcase': 'HTTP',
-                       'pascalcase': 'HTTP',
-                       'constcase': 'HTTP',
-                       'screaming_snakecase': 'HTTP',
+    'separate_words': {'camel': 'HTTP',
+                       'pascal': 'HTTP',
+                       'const': 'HTTP',
+                       'const': 'HTTP',
                        'default': 'http'},
-    'slashcase': {'camelcase': 'HTTP',
-                  'pascalcase': 'HTTP',
-                  'constcase': 'HTTP',
-                  'screaming_snakecase': 'HTTP',
+    'slash': {'camel': 'HTTP',
+                  'pascal': 'HTTP',
+                  'const': 'HTTP',
+                  'const': 'HTTP',
                   'default': 'http'},
-    'backslashcase': {'camelcase': 'HTTP',
-                      'pascalcase': 'HTTP',
-                      'constcase': 'HTTP',
-                      'screaming_snakecase': 'HTTP',
+    'backslash': {'camel': 'HTTP',
+                      'pascal': 'HTTP',
+                      'const': 'HTTP',
+                      'const': 'HTTP',
                       'default': 'http'},
 }
 
 CAPITAL_CASES = [
-    'camelcase',
-    'pascalcase',
-    'constcase',
-    'screaming_snakecase',
+    'camel',
+    'pascal',
+    'const',
+    'const',
 ]
 
 
@@ -286,7 +286,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters.
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_UNICODE))
@@ -295,7 +295,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_SINGLE))
@@ -304,7 +304,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that
         don't preserve capital/lower case letters.
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_SINGLE_UNICODE))
@@ -313,7 +313,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that
         don't preserve capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values_preserve(PRESERVE_VALUES, VALUES))
@@ -322,7 +322,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters.
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -332,7 +332,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -342,7 +342,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that do
         preserve capital/lower case letters.
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -353,7 +353,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that do
         preserve capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_ACRONYM))
@@ -362,7 +362,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters (with acronym detection).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         result = case_converter(value, acronyms=ACRONYMS)
         self.assertEqual(result, expected)
 
@@ -373,7 +373,7 @@ class CaseConversionTest(TestCase):
         capital/lower case letters (with acronym detection and unicode
         characters).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
 
@@ -384,7 +384,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters (with acronym detection).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         result = case_converter(value, acronyms=ACRONYMS)
         self.assertEqual(result, expected)
 
@@ -397,7 +397,7 @@ class CaseConversionTest(TestCase):
         capital/lower case letters (with acronym detection and unicode
         characters).
         """
-        case_converter = getattr(case_conversion, case)
+        case_converter = getattr(CaseConverter, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
 
