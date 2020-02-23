@@ -8,45 +8,45 @@ if not PYTHON2:
 
 def _get_rubstring_ranges(a_str, sub):
     start = 0
-    subLen = len(sub)
+    sub_len = len(sub)
     while True:
         start = a_str.find(sub, start)
         if start == -1:
             return
-        yield (start, start + subLen)
+        yield (start, start + sub_len)
         start += 1
 
 
-def _char_is_sep(aChar):
+def _char_is_sep(a_char):
     return (
-        not _char_is_upper(aChar)
-        and not _char_is_lower(aChar)
-        and not _char_is_decimal(aChar)
+        not _char_is_upper(a_char)
+        and not _char_is_lower(a_char)
+        and not _char_is_decimal(a_char)
     )
 
 
-def _char_is_decimal(aChar):
-    return unicodedata.category(aChar) == "Nd"
+def _char_is_decimal(a_char):
+    return unicodedata.category(a_char) == "Nd"
 
 
-def _char_is_lower(aChar):
-    return unicodedata.category(aChar) == "Ll"
+def _char_is_lower(a_char):
+    return unicodedata.category(a_char) == "Ll"
 
 
-def _char_is_upper(aChar):
-    return unicodedata.category(aChar) == "Lu"
+def _char_is_upper(a_char):
+    return unicodedata.category(a_char) == "Lu"
 
 
-def _is_upper(aString):
-    return len(aString) == 1 and _char_is_upper(aString)
+def _is_upper(a_string):
+    return len(a_string) == 1 and _char_is_upper(a_string)
 
 
-def _is_valid_acronym(aString):
-    if len(aString) == 0:
+def _is_valid_acronym(a_string):
+    if len(a_string) == 0:
         return False
 
-    for aChar in aString:
-        if _char_is_sep(aChar):
+    for a_char in a_string:
+        if _char_is_sep(a_char):
             return False
 
     return True
