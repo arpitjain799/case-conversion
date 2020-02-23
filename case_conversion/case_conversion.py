@@ -15,10 +15,8 @@ def _get_rubstring_ranges(a_str: str, sub: str) -> Iterator[Tuple[int, int]]:
 
 
 def _char_is_sep(a_char: str) -> bool:
-    return (
-        not _char_is_upper(a_char)
-        and not _char_is_lower(a_char)
-        and not _char_is_decimal(a_char)
+    return not (
+        _char_is_upper(a_char) or _char_is_lower(a_char) or _char_is_decimal(a_char)
     )
 
 
