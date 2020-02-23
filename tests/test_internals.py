@@ -60,6 +60,18 @@ def test_advanced_acronym_detection(s, i, words, acronyms, expected):
     assert CaseConverter._advanced_acronym_detection(s, i, words, acronyms) == expected
 
 
+@pytest.mark.parametrize(
+    "string,acronyms,preserve_case,expected",
+    (
+        ("fooBarBaz", None, False, (["Foo", "Bar", "Baz"], "camel", "")),
+        ("fooBarBaz", None, True, (["foo", "Bar", "Baz"], "camel", "")),
+        ("fooBarBaz", ("BAR",), False, (["Foo", "BAR", "Baz"], "camel", "")),
+        ("fooBarBaz", ("BAR",), True, (["foo", "Bar", "Baz"], "camel", "")),
+    )
+)
+def test_parse_case(string, acronyms, preserve_case, expected):
+    assert CaseConverter.parse_case(string, acronyms, preserve_case) == expected
+
 
 @pytest.mark.parametrize(
     "acronyms",
