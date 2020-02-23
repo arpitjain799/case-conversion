@@ -181,16 +181,17 @@ def sanitize_acronyms(
 
 def normalize_words(words: List[str], acronyms: Union[List[str], str]) -> List[str]:
     """Normalize case of each word to PascalCase."""
-    for i, _ in enumerate(words):  # TODO: Rewrite loop without enumerate
+    normalized = []
+    for word in words:
         # if detect_acronyms:
-        if words[i].upper() in acronyms:
+        if word.upper() in acronyms:
             # Convert known acronyms to upper-case.
-            words[i] = words[i].upper()
+            normalized.append(word.upper())
         else:
             # Fallback behavior: Preserve case on upper-case words.
-            if not words[i].isupper():
-                words[i] = words[i].capitalize()
-    return words
+            if not word.isupper():
+                normalized.append(word.capitalize())
+    return normalized
 
 
 def segment_string(string: str) -> Tuple[List[Optional[str]], str, bool]:
