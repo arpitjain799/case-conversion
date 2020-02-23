@@ -1,9 +1,11 @@
 """Unit test for case-conversion
 """
 
-from case_conversion import CaseConverter
 from unittest import TestCase
+
 from parameterized import parameterized
+
+from case_conversion import CaseConverter
 
 ACRONYMS = ["HTTP"]
 ACRONYMS_UNICODE = ["HÉÉP"]

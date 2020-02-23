@@ -2,13 +2,13 @@ from typing import List, Optional, Tuple
 
 from .alias import alias, aliased
 from .utils import (
-    _segment_string,
-    _sanitize_acronyms,
-    _determine_case,
-    _normalize_words,
-    _advanced_acronym_detection,
-    _simple_acronym_detection,
-    _is_upper,
+    segment_string,
+    sanitize_acronyms,
+    determine_case,
+    normalize_words,
+    advanced_acronym_detection,
+    simple_acronym_detection,
+    is_upper,
 )
 from .types import Case
 
@@ -42,16 +42,16 @@ class CaseConverter:
         Also returns the first separator character,
         or False if there isn't one.
         """
-        words_with_sep, separator, was_upper = _segment_string(string)
+        words_with_sep, separator, was_upper = segment_string(string)
 
         if acronyms:
             # Use advanced acronym detection with list
-            acronyms = _sanitize_acronyms(acronyms)
-            check_acronym = _advanced_acronym_detection  # type: ignore
+            acronyms = sanitize_acronyms(acronyms)
+            check_acronym = advanced_acronym_detection  # type: ignore
         else:
             acronyms = []
             # Fallback to simple acronym detection.
-            check_acronym = _simple_acronym_detection  # type: ignore
+            check_acronym = simple_acronym_detection  # type: ignore
 
         # Letter-run detector
 
@@ -63,7 +63,7 @@ class CaseConverter:
         # Find runs of single upper-case letters.
         while i < len(words_with_sep):
             word = words_with_sep[i]
-            if word is not None and _is_upper(word):
+            if word is not None and is_upper(word):
                 if s is None:
                     s = i
             elif s is not None:
@@ -75,13 +75,13 @@ class CaseConverter:
         words: List[str] = [w for w in words_with_sep if w is not None]
 
         # Determine case type.
-        case_type = _determine_case(was_upper, words, string)
+        case_type = determine_case(was_upper, words, string)
 
         if preserve_case:
             if was_upper:
                 words = [w.upper() for w in words]
         else:
-            words = _normalize_words(words, acronyms)
+            words = normalize_words(words, acronyms)
 
         return words, case_type, separator
 

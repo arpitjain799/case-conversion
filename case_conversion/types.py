@@ -5,7 +5,7 @@ class InvalidAcronymError(Exception):
     """Raise when acronym fails validation."""
 
     def __init__(self, acronym: str) -> None:
-        msg = "Case Conversion: acronym '{}' is invalid.".format(acronym)
+        msg = f"Case Conversion: acronym '{acronym}' is invalid."
         super().__init__(msg)
 
 

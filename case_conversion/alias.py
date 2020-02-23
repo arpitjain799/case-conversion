@@ -17,7 +17,7 @@ def aliased(klass):
     return klass
 
 
-class alias(object):
+class alias:
     """
     Decorator for aliasing method names.
 
