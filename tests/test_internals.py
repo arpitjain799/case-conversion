@@ -58,3 +58,18 @@ def test_sanitize_acronyms_raises_on_invalid_acronyms(acronyms):
 )
 def test_normalize_words(words, acronyms, expected):
     assert CaseConverter._normalize_words(words, acronyms) == expected
+
+
+@pytest.mark.parametrize(
+    "was_upper,words,string,expected",
+    (
+        (False, [], "", "unknown"),
+        (True, [], "", "upper"),
+        (False, [], "foobar", "lower"),
+        (False, ["foo", "Bar"], "", "camel"),
+        (False, ["Foo", "Bar"], "", "pascal"),
+        (False, ["foo", "bar"], "", "mixed"),
+    )
+)
+def test_determine_case(was_upper, words, string, expected):
+    assert CaseConverter._determine_case(was_upper, words, string) == expected
