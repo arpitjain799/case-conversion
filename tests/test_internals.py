@@ -77,7 +77,7 @@ def test_parse_case(string, acronyms, preserve_case, expected):
 
 def test_invalid_acronym_error_message():
     acronym = "BadAcronym"
-    msg = "Case Conversion: acronym '{}' is invalid.".format(acronym)
+    msg = f"Case Conversion: acronym '{acronym}' is invalid."
     try:
         raise InvalidAcronymError(acronym)
     except InvalidAcronymError as e:

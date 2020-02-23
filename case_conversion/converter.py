@@ -14,7 +14,7 @@ from .types import Case
 
 
 @aliased
-class CaseConverter(object):
+class CaseConverter:
     """Main Class."""
 
     @classmethod
