@@ -19,7 +19,7 @@ def camel(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> camel("HELLO_HTML_WORLD", ["HTML"])
         'helloHTMLWorld'
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     if words:
         words[0] = words[0].lower()
     return "".join(words)
@@ -43,7 +43,7 @@ def pascal(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> pascal("HELLO_HTML_WORLD", ["HTML"])
         'HelloHTMLWorld'
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return "".join(words)
 
 
@@ -63,7 +63,7 @@ def snake(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> snake("HelloHTMLWorld", ["HTML"])
         'hello_html_world'
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return "_".join([w.lower() for w in words])
 
 
@@ -85,7 +85,7 @@ def dash(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> dash("HelloHTMLWorld", ["HTML"])
         'hello-html-world'
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return "-".join([w.lower() for w in words])
 
 
@@ -107,7 +107,7 @@ def const(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> const("helloHTMLWorld", ["HTML"])
         'HELLO_HTML_WORLD'
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return "_".join([w.upper() for w in words])
 
 
@@ -127,7 +127,7 @@ def dot(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> dot("helloHTMLWorld", ["HTML"])
         'hello.html.world'
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return ".".join([w.lower() for w in words])
 
 
@@ -147,7 +147,7 @@ def separate_words(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> separate_words("helloHTMLWorld", ["HTML"])
         'hello HTML World'
     """
-    words, _case, _sep = parse_case(text, acronyms, preserve_case=True)
+    words, *_ = parse_case(text, acronyms, preserve_case=True)
     return " ".join(words)
 
 
@@ -167,7 +167,7 @@ def slash(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> slash("helloHTMLWorld", ["HTML"])
         'hello/HTML/World'
     """
-    words, _case, _sep = parse_case(text, acronyms, preserve_case=True)
+    words, *_ = parse_case(text, acronyms, preserve_case=True)
     return "/".join(words)
 
 
@@ -187,7 +187,7 @@ def backslash(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> backslash("helloHTMLWorld", ["HTML"])
         r'hello\HTML\World'
     """
-    words, _case, _sep = parse_case(text, acronyms, preserve_case=True)
+    words, *_ = parse_case(text, acronyms, preserve_case=True)
     return "\\".join(words)
 
 
@@ -209,7 +209,7 @@ def ada(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> ada("helloHTMLWorld", ["HTML"])
         Hello_HTML_World
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return "_".join([w.capitalize() for w in words])
 
 
@@ -305,5 +305,5 @@ def http_header(text: str, acronyms: Optional[List[str]] = None) -> str:
         >>> http_header("helloHTMLWorld", ["HTML"])
         Hello-HTML-World
     """
-    words, _case, _sep = parse_case(text, acronyms)
+    words, *_ = parse_case(text, acronyms)
     return "-".join([w.capitalize() for w in words])
