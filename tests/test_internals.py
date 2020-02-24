@@ -1,7 +1,7 @@
 import pytest
 
 import case_conversion.utils as utils
-from case_conversion import Case, CaseConverter, InvalidAcronymError
+from case_conversion import Case, parse_case, InvalidAcronymError
 
 
 @pytest.mark.parametrize(
@@ -72,7 +72,7 @@ def test_advanced_acronym_detection(s, i, words, acronyms, expected):
     ),
 )
 def test_parse_case(string, acronyms, preserve_case, expected):
-    assert CaseConverter.parse_case(string, acronyms, preserve_case) == expected
+    assert parse_case(string, acronyms, preserve_case) == expected
 
 
 def test_invalid_acronym_error_message():

@@ -5,7 +5,7 @@ from unittest import TestCase
 
 from parameterized import parameterized
 
-from case_conversion import CaseConverter
+import case_conversion
 
 ACRONYMS = ["HTTP"]
 ACRONYMS_UNICODE = ["HÉÉP"]
@@ -148,18 +148,8 @@ PRESERVE_VALUES_SINGLE = {
         "const": "FOO",
         "default": "foo",
     },
-    "slash": {
-        "camel": "foo",
-        "pascal": "Foo",
-        "const": "FOO",
-        "default": "foo",
-    },
-    "backslash": {
-        "camel": "foo",
-        "pascal": "Foo",
-        "const": "FOO",
-        "default": "foo",
-    },
+    "slash": {"camel": "foo", "pascal": "Foo", "const": "FOO", "default": "foo",},
+    "backslash": {"camel": "foo", "pascal": "Foo", "const": "FOO", "default": "foo",},
 }
 
 PRESERVE_VALUES_SINGLE_UNICODE = {
@@ -169,18 +159,8 @@ PRESERVE_VALUES_SINGLE_UNICODE = {
         "const": "FÓO",
         "default": "fóo",
     },
-    "slash": {
-        "camel": "fóo",
-        "pascal": "Fóo",
-        "const": "FÓO",
-        "default": "fóo",
-    },
-    "backslash": {
-        "camel": "fóo",
-        "pascal": "Fóo",
-        "const": "FÓO",
-        "default": "fóo",
-    },
+    "slash": {"camel": "fóo", "pascal": "Fóo", "const": "FÓO", "default": "fóo",},
+    "backslash": {"camel": "fóo", "pascal": "Fóo", "const": "FÓO", "default": "fóo",},
 }
 
 PRESERVE_VALUES_ACRONYM = {
@@ -233,12 +213,7 @@ PRESERVE_VALUES_ACRONYM_SINGLE = {
         "const": "HTTP",
         "default": "http",
     },
-    "slash": {
-        "camel": "HTTP",
-        "pascal": "HTTP",
-        "const": "HTTP",
-        "default": "http",
-    },
+    "slash": {"camel": "HTTP", "pascal": "HTTP", "const": "HTTP", "default": "http",},
     "backslash": {
         "camel": "HTTP",
         "pascal": "HTTP",
@@ -293,7 +268,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_UNICODE))
@@ -302,7 +277,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_SINGLE))
@@ -311,7 +286,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that
         don't preserve capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_SINGLE_UNICODE))
@@ -320,7 +295,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that
         don't preserve capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values_preserve(PRESERVE_VALUES, VALUES))
@@ -329,7 +304,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -340,7 +315,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -351,7 +326,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that do
         preserve capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -362,7 +337,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that do
         preserve capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_ACRONYM))
@@ -371,7 +346,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters (with acronym detection).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS)
         self.assertEqual(result, expected)
 
@@ -382,7 +357,7 @@ class CaseConversionTest(TestCase):
         capital/lower case letters (with acronym detection and unicode
         characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
 
@@ -394,7 +369,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters (with acronym detection).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS)
         self.assertEqual(result, expected)
 
@@ -407,6 +382,6 @@ class CaseConversionTest(TestCase):
         capital/lower case letters (with acronym detection and unicode
         characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
