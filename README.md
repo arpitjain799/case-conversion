@@ -1,4 +1,5 @@
 ![](https://github.com/AlejandroFrias/case-conversion/workflows/CI/badge.svg)
+![](https://img.shields.io/pypi/v/case_conversion)
 
 # Case Conversion
 
