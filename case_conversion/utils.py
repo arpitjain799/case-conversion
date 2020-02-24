@@ -164,8 +164,8 @@ def sanitize_acronyms(
 ) -> List[str]:
     """Normalize valid acronyms to upper-case.
 
-    If an invalid acronym is encountered (contains separators)
-    raise InvalidAcronymError.
+    Raises:
+        InvalidAcronymException: Upon passing an invalid acronym
     """
     acronyms = []
     for acr in unsafe_acronyms:
