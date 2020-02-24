@@ -1,6 +1,3 @@
-"""Unit test for case-conversion
-"""
-
 from unittest import TestCase
 
 from parameterized import parameterized
