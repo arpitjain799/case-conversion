@@ -22,7 +22,7 @@ jobs:
         poetry install --no-root
     - name: Run flake8
       run: |
-        poetry run flake8 . --config pyproject.toml
+        poetry run flake8 ./case_conversion --config pyproject.toml
     - name: Run mypy
       run: |
         poetry run mypy ./case_conversion

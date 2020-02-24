@@ -1,7 +1,7 @@
 import pytest
 
-from case_conversion import Case, CaseConverter, InvalidAcronymError
 import case_conversion.utils as utils
+from case_conversion import Case, InvalidAcronymError
 
 
 @pytest.mark.parametrize(
@@ -21,7 +21,7 @@ import case_conversion.utils as utils
     ),
 )
 def test_segment_string(string, expected):
-    assert utils._segment_string(string) == expected
+    assert utils.segment_string(string) == expected
 
 
 @pytest.mark.parametrize(
@@ -35,7 +35,7 @@ def test_segment_string(string, expected):
     ),
 )
 def test_sanitize_acronyms(acronyms, expected):
-    assert utils._sanitize_acronyms(acronyms) == expected
+    assert utils.sanitize_acronyms(acronyms) == expected
 
 
 @pytest.mark.parametrize(
@@ -47,7 +47,7 @@ def test_sanitize_acronyms(acronyms, expected):
     ),
 )
 def test_simple_acronym_detection(s, i, words, expected):
-    assert utils._simple_acronym_detection(s, i, words) == expected
+    assert utils.simple_acronym_detection(s, i, words) == expected
 
 
 @pytest.mark.parametrize(
@@ -59,35 +59,13 @@ def test_simple_acronym_detection(s, i, words, expected):
     ),
 )
 def test_advanced_acronym_detection(s, i, words, acronyms, expected):
-    assert utils._advanced_acronym_detection(s, i, words, acronyms) == expected
-
-
-@pytest.mark.parametrize(
-    "string,acronyms,preserve_case,expected",
-    (
-        ("fooBarBaz", None, False, (["Foo", "Bar", "Baz"], Case.CAMEL, "")),
-        ("fooBarBaz", None, True, (["foo", "Bar", "Baz"], Case.CAMEL, "")),
-        ("fooBarBaz", ("BAR",), False, (["Foo", "BAR", "Baz"], Case.CAMEL, "")),
-        ("fooBarBaz", ("BAR",), True, (["foo", "Bar", "Baz"], Case.CAMEL, "")),
-    ),
-)
-def test_parse_case(string, acronyms, preserve_case, expected):
-    assert CaseConverter.parse_case(string, acronyms, preserve_case) == expected
-
-
-def test_invalid_acronym_error_message():
-    acronym = "BadAcronym"
-    msg = "Case Conversion: acronym '{}' is invalid.".format(acronym)
-    try:
-        raise InvalidAcronymError(acronym)
-    except InvalidAcronymError as e:
-        assert msg in str(e)
+    assert utils.advanced_acronym_detection(s, i, words, acronyms) == expected
 
 
 @pytest.mark.parametrize("acronyms", ("HT-TP", "NA SA", "SU.GAR"))
 def test_sanitize_acronyms_raises_on_invalid_acronyms(acronyms):
     with pytest.raises(InvalidAcronymError):
-        utils._sanitize_acronyms(acronyms)
+        utils.sanitize_acronyms(acronyms)
 
 
 @pytest.mark.parametrize(
@@ -100,7 +78,7 @@ def test_sanitize_acronyms_raises_on_invalid_acronyms(acronyms):
     ),
 )
 def test_normalize_words(words, acronyms, expected):
-    assert utils._normalize_words(words, acronyms) == expected
+    assert utils.normalize_words(words, acronyms) == expected
 
 
 @pytest.mark.parametrize(
@@ -115,4 +93,4 @@ def test_normalize_words(words, acronyms, expected):
     ),
 )
 def test_determine_case(was_upper, words, string, expected):
-    assert utils._determine_case(was_upper, words, string) == expected
+    assert utils.determine_case(was_upper, words, string) == expected

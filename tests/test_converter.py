@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-"""Unit test for case-conversion
-"""
-
-from case_conversion import CaseConverter
 from unittest import TestCase
+
 from parameterized import parameterized
+
+import case_conversion
 
 ACRONYMS = ["HTTP"]
 ACRONYMS_UNICODE = ["HÉÉP"]
@@ -14,7 +12,6 @@ CASES = [
     "pascal",
     "snake",
     "dash",
-    "spinal",
     "dash",
     "const",
     "const",
@@ -32,9 +29,6 @@ VALUES = {
     "pascal": "FooBarString",
     "snake": "foo_bar_string",
     "dash": "foo-bar-string",
-    "spinal": "foo-bar-string",
-    "dash": "foo-bar-string",
-    "const": "FOO_BAR_STRING",
     "const": "FOO_BAR_STRING",
     "dot": "foo.bar.string",
     "separate_words": "foo bar string",
@@ -47,9 +41,6 @@ VALUES_UNICODE = {
     "pascal": "FóoBarString",
     "snake": "fóo_bar_string",
     "dash": "fóo-bar-string",
-    "spinal": "fóo-bar-string",
-    "dash": "fóo-bar-string",
-    "const": "FÓO_BAR_STRING",
     "const": "FÓO_BAR_STRING",
     "dot": "fóo.bar.string",
     "separate_words": "fóo bar string",
@@ -62,9 +53,6 @@ VALUES_SINGLE = {
     "pascal": "Foo",
     "snake": "foo",
     "dash": "foo",
-    "spinal": "foo",
-    "dash": "foo",
-    "const": "FOO",
     "const": "FOO",
     "dot": "foo",
     "separate_words": "foo",
@@ -77,9 +65,6 @@ VALUES_SINGLE_UNICODE = {
     "pascal": "Fóo",
     "snake": "fóo",
     "dash": "fóo",
-    "spinal": "fóo",
-    "dash": "fóo",
-    "const": "FÓO",
     "const": "FÓO",
     "dot": "fóo",
     "separate_words": "fóo",
@@ -92,9 +77,6 @@ VALUES_ACRONYM = {
     "pascal": "FooHTTPBarString",
     "snake": "foo_http_bar_string",
     "dash": "foo-http-bar-string",
-    "spinal": "foo-http-bar-string",
-    "dash": "foo-http-bar-string",
-    "const": "FOO_HTTP_BAR_STRING",
     "const": "FOO_HTTP_BAR_STRING",
     "dot": "foo.http.bar.string",
     "separate_words": "foo http bar string",
@@ -107,9 +89,6 @@ VALUES_ACRONYM_UNICODE = {
     "pascal": "FooHÉÉPBarString",
     "snake": "foo_héép_bar_string",
     "dash": "foo-héép-bar-string",
-    "spinal": "foo-héép-bar-string",
-    "dash": "foo-héép-bar-string",
-    "const": "FOO_HÉÉP_BAR_STRING",
     "const": "FOO_HÉÉP_BAR_STRING",
     "dot": "foo.héép.bar.string",
     "separate_words": "foo héép bar string",
@@ -122,20 +101,17 @@ PRESERVE_VALUES = {
         "camel": "foo Bar String",
         "pascal": "Foo Bar String",
         "const": "FOO BAR STRING",
-        "const": "FOO BAR STRING",
         "default": "foo bar string",
     },
     "slash": {
         "camel": "foo/Bar/String",
         "pascal": "Foo/Bar/String",
         "const": "FOO/BAR/STRING",
-        "const": "FOO/BAR/STRING",
         "default": "foo/bar/string",
     },
     "backslash": {
         "camel": "foo\\Bar\\String",
         "pascal": "Foo\\Bar\\String",
-        "const": "FOO\\BAR\\STRING",
         "const": "FOO\\BAR\\STRING",
         "default": "foo\\bar\\string",
     },
@@ -146,20 +122,17 @@ PRESERVE_VALUES_UNICODE = {
         "camel": "fóo Bar String",
         "pascal": "Fóo Bar String",
         "const": "FÓO BAR STRING",
-        "const": "FÓO BAR STRING",
         "default": "fóo bar string",
     },
     "slash": {
         "camel": "fóo/Bar/String",
         "pascal": "Fóo/Bar/String",
         "const": "FÓO/BAR/STRING",
-        "const": "FÓO/BAR/STRING",
         "default": "fóo/bar/string",
     },
     "backslash": {
         "camel": "fóo\\Bar\\String",
         "pascal": "Fóo\\Bar\\String",
-        "const": "FÓO\\BAR\\STRING",
         "const": "FÓO\\BAR\\STRING",
         "default": "fóo\\bar\\string",
     },
@@ -170,23 +143,10 @@ PRESERVE_VALUES_SINGLE = {
         "camel": "foo",
         "pascal": "Foo",
         "const": "FOO",
-        "const": "FOO",
         "default": "foo",
     },
-    "slash": {
-        "camel": "foo",
-        "pascal": "Foo",
-        "const": "FOO",
-        "const": "FOO",
-        "default": "foo",
-    },
-    "backslash": {
-        "camel": "foo",
-        "pascal": "Foo",
-        "const": "FOO",
-        "const": "FOO",
-        "default": "foo",
-    },
+    "slash": {"camel": "foo", "pascal": "Foo", "const": "FOO", "default": "foo",},
+    "backslash": {"camel": "foo", "pascal": "Foo", "const": "FOO", "default": "foo",},
 }
 
 PRESERVE_VALUES_SINGLE_UNICODE = {
@@ -194,23 +154,10 @@ PRESERVE_VALUES_SINGLE_UNICODE = {
         "camel": "fóo",
         "pascal": "Fóo",
         "const": "FÓO",
-        "const": "FÓO",
         "default": "fóo",
     },
-    "slash": {
-        "camel": "fóo",
-        "pascal": "Fóo",
-        "const": "FÓO",
-        "const": "FÓO",
-        "default": "fóo",
-    },
-    "backslash": {
-        "camel": "fóo",
-        "pascal": "Fóo",
-        "const": "FÓO",
-        "const": "FÓO",
-        "default": "fóo",
-    },
+    "slash": {"camel": "fóo", "pascal": "Fóo", "const": "FÓO", "default": "fóo",},
+    "backslash": {"camel": "fóo", "pascal": "Fóo", "const": "FÓO", "default": "fóo",},
 }
 
 PRESERVE_VALUES_ACRONYM = {
@@ -218,20 +165,17 @@ PRESERVE_VALUES_ACRONYM = {
         "camel": "foo HTTP Bar String",
         "pascal": "Foo HTTP Bar String",
         "const": "FOO HTTP BAR STRING",
-        "const": "FOO HTTP BAR STRING",
         "default": "foo http bar string",
     },
     "slash": {
         "camel": "foo/HTTP/Bar/String",
         "pascal": "Foo/HTTP/Bar/String",
         "const": "FOO/HTTP/BAR/STRING",
-        "const": "FOO/HTTP/BAR/STRING",
         "default": "foo/http/bar/string",
     },
     "backslash": {
         "camel": "foo\\HTTP\\Bar\\String",
         "pascal": "Foo\\HTTP\\Bar\\String",
-        "const": "FOO\\HTTP\\BAR\\STRING",
         "const": "FOO\\HTTP\\BAR\\STRING",
         "default": "foo\\http\\bar\\string",
     },
@@ -242,20 +186,17 @@ PRESERVE_VALUES_ACRONYM_UNICODE = {
         "camel": "foo HÉÉP Bar String",
         "pascal": "Foo HÉÉP Bar String",
         "const": "FOO HÉÉP BAR STRING",
-        "const": "FOO HÉÉP BAR STRING",
         "default": "foo héép bar string",
     },
     "slash": {
         "camel": "foo/HÉÉP/Bar/String",
         "pascal": "Foo/HÉÉP/Bar/String",
         "const": "FOO/HÉÉP/BAR/STRING",
-        "const": "FOO/HÉÉP/BAR/STRING",
         "default": "foo/héép/bar/string",
     },
     "backslash": {
         "camel": "foo\\HÉÉP\\Bar\\String",
         "pascal": "Foo\\HÉÉP\\Bar\\String",
-        "const": "FOO\\HÉÉP\\BAR\\STRING",
         "const": "FOO\\HÉÉP\\BAR\\STRING",
         "default": "foo\\héép\\bar\\string",
     },
@@ -267,20 +208,12 @@ PRESERVE_VALUES_ACRONYM_SINGLE = {
         "camel": "HTTP",
         "pascal": "HTTP",
         "const": "HTTP",
-        "const": "HTTP",
         "default": "http",
     },
-    "slash": {
-        "camel": "HTTP",
-        "pascal": "HTTP",
-        "const": "HTTP",
-        "const": "HTTP",
-        "default": "http",
-    },
+    "slash": {"camel": "HTTP", "pascal": "HTTP", "const": "HTTP", "default": "http",},
     "backslash": {
         "camel": "HTTP",
         "pascal": "HTTP",
-        "const": "HTTP",
         "const": "HTTP",
         "default": "http",
     },
@@ -332,7 +265,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_UNICODE))
@@ -341,7 +274,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_SINGLE))
@@ -350,7 +283,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that
         don't preserve capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_SINGLE_UNICODE))
@@ -359,7 +292,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that
         don't preserve capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values_preserve(PRESERVE_VALUES, VALUES))
@@ -368,7 +301,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -379,7 +312,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -390,7 +323,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that do
         preserve capital/lower case letters.
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(
@@ -401,7 +334,7 @@ class CaseConversionTest(TestCase):
         Test conversions of single words from all cases to all cases that do
         preserve capital/lower case letters (with unicode characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         self.assertEqual(case_converter(value), expected)
 
     @parameterized.expand(_expand_values(VALUES_ACRONYM))
@@ -410,7 +343,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that don't preserve
         capital/lower case letters (with acronym detection).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS)
         self.assertEqual(result, expected)
 
@@ -421,7 +354,7 @@ class CaseConversionTest(TestCase):
         capital/lower case letters (with acronym detection and unicode
         characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
 
@@ -433,7 +366,7 @@ class CaseConversionTest(TestCase):
         Test conversions from all cases to all cases that do preserve
         capital/lower case letters (with acronym detection).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS)
         self.assertEqual(result, expected)
 
@@ -446,12 +379,6 @@ class CaseConversionTest(TestCase):
         capital/lower case letters (with acronym detection and unicode
         characters).
         """
-        case_converter = getattr(CaseConverter, case)
+        case_converter = getattr(case_conversion, case)
         result = case_converter(value, acronyms=ACRONYMS_UNICODE)
         self.assertEqual(result, expected)
-
-
-if __name__ == "__main__":
-    from unittest import main
-
-    main()
