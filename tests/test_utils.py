@@ -1,7 +1,7 @@
 import pytest
 
 import case_conversion.utils as utils
-from case_conversion import Case, parse_case, InvalidAcronymError
+from case_conversion import Case, InvalidAcronymError
 
 
 @pytest.mark.parametrize(
@@ -60,28 +60,6 @@ def test_simple_acronym_detection(s, i, words, expected):
 )
 def test_advanced_acronym_detection(s, i, words, acronyms, expected):
     assert utils.advanced_acronym_detection(s, i, words, acronyms) == expected
-
-
-@pytest.mark.parametrize(
-    "string,acronyms,preserve_case,expected",
-    (
-        ("fooBarBaz", None, False, (["Foo", "Bar", "Baz"], Case.CAMEL, "")),
-        ("fooBarBaz", None, True, (["foo", "Bar", "Baz"], Case.CAMEL, "")),
-        ("fooBarBaz", ("BAR",), False, (["Foo", "BAR", "Baz"], Case.CAMEL, "")),
-        ("fooBarBaz", ("BAR",), True, (["foo", "Bar", "Baz"], Case.CAMEL, "")),
-    ),
-)
-def test_parse_case(string, acronyms, preserve_case, expected):
-    assert parse_case(string, acronyms, preserve_case) == expected
-
-
-def test_invalid_acronym_error_message():
-    acronym = "BadAcronym"
-    msg = f"Case Conversion: acronym '{acronym}' is invalid."
-    try:
-        raise InvalidAcronymError(acronym)
-    except InvalidAcronymError as e:
-        assert msg in str(e)
 
 
 @pytest.mark.parametrize("acronyms", ("HT-TP", "NA SA", "SU.GAR"))
