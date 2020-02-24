@@ -1,8 +1,8 @@
-## Case Conversion
+# Case Conversion
 
-This is a port of the [CaseConversion Sublime Plugin](https://github.com/jdc0589/CaseConversion), by [Davis Clark's](https://github.com/jdc0589), to a regular python package. I couldn't find any other python packages on PyPi at the time (Feb 2016) that could seamlessly convert from any case to any other case without having to specify from what type of case I was converting. This plugin worked really well, so I separated the (non-sublime) python parts of the plugin into this useful python package. I also added Unicode support via python's `unicodedata`. Credit goes to [Davis Clark's](https://github.com/jdc0589) and the contributors to that plugin (Scott Bessler, Curtis Gibby, Matt Morrison) for their awesome work on making such a robust and awesome case converter.
+This is a port of the [CaseConversion Sublime Plugin](https://github.com/jdc0589/CaseConversion), by [Davis Clark's](https://github.com/jdc0589), to a regular python package. I couldn't find any other python packages on PyPi at the time (Feb 2016) that could seamlessly convert from any case to any other case without having to specify from what type of case I was converting. This plugin worked really well, so I separated the (non-sublime) python parts of the plugin into this useful python package. I also added Unicode support via python's `unicodedata`. 
 
-#### Features
+## Features
 
 - Autodetection of case *(no need to specify explicitly which case you are converting from!)*
 - Acronym detection *(no funky splitting on every capital letter of an all caps acronym like `HTTPError`!)*
@@ -23,7 +23,7 @@ This is a port of the [CaseConversion Sublime Plugin](https://github.com/jdc0589
   - `Ada_Case`
   - `Http-Header-Case`
 
-##### Usage
+## Usage
 
 Normal use is self-explanatory.
 
@@ -60,6 +60,16 @@ FÓÓ_BAR_STRING
 ```
 pip install case-conversion
 ```
+
+
+
+## Credits
+
+Credit goes to [Davis Clark's](https://github.com/jdc0589) as the author of the original plugin and its contributors (Scott Bessler, Curtis Gibby, Matt Morrison). Thanks for their awesome work on making such a robust and awesome case converter.
+
+Further credit goes to @olsonpm for making this package dependency-free.
+
+
 
 ## Licence
 
