@@ -1,6 +1,5 @@
 from typing import List, Optional, Tuple
 
-from .alias import alias, aliased
 from .types import Case
 from .utils import (
     advanced_acronym_detection,
@@ -13,7 +12,6 @@ from .utils import (
 )
 
 
-@aliased
 class CaseConverter:
     """Main Class."""
 
@@ -109,7 +107,6 @@ class CaseConverter:
             words[0] = words[0].lower()
         return "".join(words)
 
-    @alias("mixed")
     @classmethod
     def pascal(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
         """Return text in PascalCase style.
@@ -152,7 +149,6 @@ class CaseConverter:
         words, _case, _sep = cls.parse_case(text, acronyms)
         return "_".join([w.lower() for w in words])
 
-    @alias("kebap", "spinal", "slug")
     @classmethod
     def dash(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
         """Return text in dash-case style.
@@ -175,7 +171,6 @@ class CaseConverter:
         words, _case, _sep = cls.parse_case(text, acronyms)
         return "-".join([w.lower() for w in words])
 
-    @alias("screaming")
     @classmethod
     def const(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
         """Return text in CONST_CASE style.
@@ -278,7 +273,6 @@ class CaseConverter:
         words, _case, _sep = cls.parse_case(text, acronyms, preserve_case=True)
         return "\\".join(words)
 
-    @alias("camel_snake")
     @classmethod
     def ada(cls, text: str, acronyms: Optional[List[str]] = None) -> str:
         """Return text in Ada_Case style.
