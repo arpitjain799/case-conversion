@@ -29,21 +29,31 @@ Normal use is self-explanatory.
 
 ```python
 >>> import case_conversion
->>> case_conversion.kebabcase("FOO_BAR_STRING")
+>>> case_conversion.dash("FOO_BAR_STRING")
 'foo-bar-string'
->>> print(case_conversion.constcase(u"fóó-bar-string"))
-FÓÓ_BAR_STRING
 ```
 
-To use acronym detection set `detect_acronyms` to `True` and pass in a list of `acronyms` to detect as whole words.
+To use acronym detection simply pass in a list of `acronyms` to detect as whole words.
 
 ```python
 >>> import case_conversion
->>> case_conversion.snakecase("fooBarHTTPError")
-'foo_bar_h_t_t_p_error'  # ewwww
->>> case_conversion.snakecase("fooBarHTTPError", detect_acronyms=True, acronyms=['HTTP'])
-'foo_bar_http_error'  # pretty
+>>> case_conversion.snake("fooBarHTTPError")
+'foo_bar_h_t_t_p_error'  # ewwww :(
+>>> case_conversion.snake("fooBarHTTPError", acronyms=['HTTP'])
+'foo_bar_http_error'  # pretty :)
 ```
+
+Unicode is fully supported - even for acronyms.
+
+```python
+>>> import case_conversion
+>>> case_conversion.const(u"fóó-bar-string")
+FÓÓ_BAR_STRING
+>>> case_conversion.snake("fooBarHÓÓPError", acronyms=['HÓÓP'])
+'foo_bar_hóóp_error'
+```
+
+
 
 ## Install
 
