@@ -1,10 +1,10 @@
 import unicodedata
-from typing import Iterator, List, Optional, Tuple, Union
+from typing import Iterator, List, Optional, Tuple
 
 from .types import Case, InvalidAcronymError
 
 
-def get_rubstring_ranges(a_str: str, sub: str) -> Iterator[Tuple[int, int]]:
+def get_rubstring_ranges(a_str: str, sub: str) -> Iterator[Tuple[int, int]]:  # noqa
     start = 0
     sub_len = len(sub)
     while True:
@@ -15,29 +15,29 @@ def get_rubstring_ranges(a_str: str, sub: str) -> Iterator[Tuple[int, int]]:
         start += 1
 
 
-def char_is_sep(a_char: str) -> bool:
+def char_is_sep(a_char: str) -> bool:  # noqa: D103
     return not (
         char_is_upper(a_char) or char_is_lower(a_char) or char_is_decimal(a_char)
     )
 
 
-def char_is_decimal(a_char: str) -> bool:
+def char_is_decimal(a_char: str) -> bool:  # noqa: D103
     return unicodedata.category(a_char) == "Nd"
 
 
-def char_is_lower(a_char: str) -> bool:
+def char_is_lower(a_char: str) -> bool:  # noqa: D103
     return unicodedata.category(a_char) == "Ll"
 
 
-def char_is_upper(a_char: str) -> bool:
+def char_is_upper(a_char: str) -> bool:  # noqa: D103
     return unicodedata.category(a_char) == "Lu"
 
 
-def is_upper(a_string: str) -> bool:
+def is_upper(a_string: str) -> bool:  # noqa: D103
     return len(a_string) == 1 and char_is_upper(a_string)
 
 
-def is_valid_acronym(a_string: str) -> bool:
+def is_valid_acronym(a_string: str) -> bool:  # noqa: D103
     if not a_string:
         return False
 
@@ -49,25 +49,15 @@ def is_valid_acronym(a_string: str) -> bool:
 
 
 def determine_case(was_all_upper: bool, words: List[str], string: str) -> Case:
-    """
-    Determine case type of string.
+    """Determine case type of string.
 
     Arguments:
-        was_all_upper {[type]} -- [description]
-        words {[type]} -- [description]
-        string {[type]} -- [description]
+        was_all_upper (bool): [description]
+        words (list of str): Segmented input string
+        string (str): Original input string
 
     Returns:
-        - upper: All words are upper-case.
-        - lower: All words are lower-case.
-        - pascal: All words are title-case or upper-case. Note that the
-                  stringiable may still have separators.
-        - camel: First word is lower-case, the rest are title-case or
-                 upper-case. stringiable may still have separators.
-        - mixed: Any other mixing of word casing. Never occurs if there are
-                 no separators.
-        - unknown: stringiable contains no words.
-
+        Case: Determined case
     """
     case_type = Case.UNKOWN
     if was_all_upper:
@@ -101,8 +91,14 @@ def advanced_acronym_detection(
 ) -> int:
     """Detect acronyms by checking against a list of acronyms.
 
-    Check a run of words represented by the range [s, i].
-    Return last index of new word groups.
+    Arguments:
+        s (int): Index of first letter in run
+        i (int): Index of current word
+        words (list of str): Segmented input string
+        acronyms (list of str): List of acronyms
+
+    Returns:
+        int: Index of last letter in run
     """
     # Combine each letter into single string.
     acr_str = "".join(words[s:i])
@@ -145,7 +141,18 @@ def advanced_acronym_detection(
 
 
 def simple_acronym_detection(s: int, i: int, words: List[str], *args) -> int:
-    """Detect acronyms based on runs of upper-case letters."""
+    """Detect acronyms based on runs of upper-case letters.
+
+    Arguments:
+        s (int): Index of first letter in run
+        i (int): Index of current word
+        words (list of str): Segmented input string
+        args: Placeholder to conform to signature of
+            advanced_acronym_detection
+
+    Returns:
+        int: Index of last letter in run
+    """
     # Combine each letter into a single string.
     acr_str = "".join(words[s:i])
 
@@ -159,13 +166,17 @@ def simple_acronym_detection(s: int, i: int, words: List[str], *args) -> int:
     return s
 
 
-def sanitize_acronyms(
-    unsafe_acronyms: Union[List[str], Tuple[str], Tuple[str, str], str]
-) -> List[str]:
+def sanitize_acronyms(unsafe_acronyms: List[str]) -> List[str]:
     """Normalize valid acronyms to upper-case.
 
+    Arguments:
+        unsafe_acronyms (list of str): Acronyms to be sanitized
+
+    Returns:
+        list of str: Sanitized acronyms
+
     Raises:
-        InvalidAcronymException: Upon passing an invalid acronym
+        InvalidAcronymError: Upon encountering an invalid acronym
     """
     acronyms = []
     for acr in unsafe_acronyms:
@@ -176,8 +187,16 @@ def sanitize_acronyms(
     return acronyms
 
 
-def normalize_words(words: List[str], acronyms: Union[List[str], str]) -> List[str]:
-    """Normalize case of each word to PascalCase."""
+def normalize_words(words: List[str], acronyms: List[str]) -> List[str]:
+    """Normalize case of each word to PascalCase.
+
+    Arguments:
+        words (list of str): Words to normalize
+        acronyms (list of str): Acronymes to upper
+
+    Returns:
+        list of str: Normalized words
+    """
     normalized = []
     for word in words:
         # if detect_acronyms:
@@ -195,11 +214,12 @@ def segment_string(string: str) -> Tuple[List[Optional[str]], str, bool]:
     """Segment string on separator into list of words.
 
     Arguments:
-        string -- the string we want to process
+        string (str): The string to process
+
     Returns:
-        words -- list of words the string got minced to
-        separator -- the separator char intersecting words
-        was_upper -- whether string happened to be upper-case
+        optional, list of str: List of words the string got minced to
+        separator: The separator char intersecting words
+        bool: Whether the string was upper-case
     """
     words: List[Optional[str]] = []
     separator = ""
@@ -212,7 +232,7 @@ def segment_string(string: str) -> Tuple[List[Optional[str]], str, bool]:
     # Previous character.
     prev_i = string[0:1]
 
-    # Treat an all-caps stringiable as lower-case, to prevent its
+    # Treat an all-caps string as lower-case, to prevent its
     # letters to be counted as boundaries
     was_upper = False
     if string.isupper():
@@ -220,7 +240,7 @@ def segment_string(string: str) -> Tuple[List[Optional[str]], str, bool]:
         was_upper = True
 
     # Iterate over each character, checking for boundaries, or places
-    # where the stringiable should divided.
+    # where the string should divided.
     while curr_i <= len(string):
         char = string[curr_i : curr_i + 1]
         split = False
@@ -243,8 +263,8 @@ def segment_string(string: str) -> Tuple[List[Optional[str]], str, bool]:
             if not char_is_sep(prev_i):
                 words.append(string[seq_i:curr_i])
             else:
-                # stringiable contains at least one separator.
-                # Use the first one as the stringiable's primary separator.
+                # string contains at least one separator.
+                # Use the first one as the string's primary separator.
                 if not separator:
                     separator = string[seq_i : seq_i + 1]
 
