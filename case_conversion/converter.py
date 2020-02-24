@@ -213,82 +213,6 @@ def ada(text: str, acronyms: Optional[List[str]] = None) -> str:
     return "_".join([w.capitalize() for w in words])
 
 
-def title(text: str, acronyms: Optional[List[str]] = None) -> str:
-    """Return text in Title_case style.
-
-    Args:
-        text (str): Input string to be converted
-        acronyms (optional, list of str): List of acronyms to honor
-
-    Returns:
-        str: Case converted text
-
-    Examples:
-        >>> title("hello_world")
-        Hello_world
-        >>> title("helloHTMLWorld", ["HTML"])
-        Hello_HTML_world
-    """
-    return cls.snake(text, acronyms).capitalize()
-
-
-def lower(text: str, acronyms: Optional[List[str]] = None) -> str:
-    """Return text in lowercase style.
-
-    Args:
-        text (str): Input string to be converted
-        acronyms (optional, list of str): List of acronyms to honor
-
-    Returns:
-        str: Case converted text
-
-    Examples:
-        >>> lower("HELLO_WORLD")
-        hello_world
-        >>> lower("helloHTMLWorld", ["HTML"])
-        Hello_HTML_world
-    """
-    return text.lower()
-
-
-def upper(text: str, acronyms: Optional[List[str]] = None) -> str:
-    """Return text in UPPERCASE style.
-
-    Args:
-        text (str): Input string to be converted
-        acronyms (optional, list of str): List of acronyms to honor
-
-    Returns:
-        str: Case converted text
-
-    Examples:
-        >>> upper("hello_world")
-        HELLO_WORLD
-        >>> upper("helloHTMLWorld", ["HTML"])
-        Hello_HTML_world
-    """
-    return text.upper()
-
-
-def capital(text: str, acronyms: Optional[List[str]] = None) -> str:
-    """Return text in UPPERCASE style.
-
-    Args:
-        text (str): Input string to be converted
-        acronyms (optional, list of str): List of acronyms to honor
-
-    Returns:
-        str: Case converted text
-
-    Examples:
-        >>> capital("hello_world")
-        HELLO_WORLD
-        >>> capital("helloHTMLWorld", ["HTML"])
-        Hello_HTML_world
-    """
-    return text.capitalize()
-
-
 def http_header(text: str, acronyms: Optional[List[str]] = None) -> str:
     """Return text in Http-Header-Case style.
 
@@ -307,3 +231,99 @@ def http_header(text: str, acronyms: Optional[List[str]] = None) -> str:
     """
     words, *_ = parse_case(text, acronyms)
     return "-".join([w.capitalize() for w in words])
+
+
+def lower(text: str, *args, **kwargs) -> str:
+    """Return text in lowercase style.
+
+    This is a convenience function wrapping inbuilt lower().
+    It features the same signature as other conversion functions.
+    Note: Acronyms are not being honored.
+
+    Args:
+        text (str): Input string to be converted
+        args : Placeholder to conform to common signature
+        kwargs : Placeholder to conform to common signature
+
+    Returns:
+        str: Case converted text
+
+    Examples:
+        >>> lower("HELLO_WORLD")
+        hello_world
+        >>> lower("helloHTMLWorld", ["HTML"])
+        Hello_HTML_world
+    """
+    return text.lower()
+
+
+def upper(text: str, *args, **kwargs) -> str:
+    """Return text in UPPERCASE style.
+
+    This is a convenience function wrapping inbuilt upper().
+    It features the same signature as other conversion functions.
+    Note: Acronyms are not being honored.
+
+    Args:
+        text (str): Input string to be converted
+        args : Placeholder to conform to common signature
+        kwargs : Placeholder to conform to common signature
+
+    Returns:
+        str: Case converted text
+
+    Examples:
+        >>> upper("hello_world")
+        HELLO_WORLD
+        >>> upper("helloHTMLWorld", ["HTML"])
+        Hello_HTML_world
+    """
+    return text.upper()
+
+
+def title(text: str, *args, **kwargs) -> str:
+    """Return text in Title_case style.
+
+    This is a convenience function wrapping inbuilt title().
+    It features the same signature as other conversion functions.
+    Note: Acronyms are not being honored.
+
+    Args:
+        text (str): Input string to be converted
+        args : Placeholder to conform to common signature
+        kwargs : Placeholder to conform to common signature
+
+    Returns:
+        str: Case converted text
+
+    Examples:
+        >>> title("hello_world")
+        Hello_world
+        >>> title("helloHTMLWorld", ["HTML"])
+        Hello_HTML_world
+    """
+    return text.title()
+
+
+def capital(text: str, *args, **kwargs) -> str:
+    """Return text in Capital case style.
+
+    This is a convenience function wrapping inbuilt capitalize().
+    It features the same signature as other conversion functions.
+    Note: Acronyms are not being honored.
+
+    Args:
+        text (str): Input string to be converted
+        args : Placeholder to conform to common signature
+        kwargs : Placeholder to conform to common signature
+
+    Returns:
+        str: Case converted text
+
+    Examples:
+        >>> capital("hello_world")
+        HELLO_WORLD
+        >>> capital("helloHTMLWorld", ["HTML"])
+        Hello_HTML_world
+    """
+    return text.capitalize()
