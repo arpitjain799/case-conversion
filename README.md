@@ -63,6 +63,20 @@ pip install case-conversion
 
 
 
+## Contribute
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+This package is being developed with [poetry]([https://python-poetry.org/](https://python-poetry.org/)) (-> [docs]([https://python-poetry.org/docs/](https://python-poetry.org/docs/))).
+
+Before opening a pull request, please make sure to:
+
+- update tests as appropriate
+
+- `flake8`, `mypy` and `pytest` are happy
+
+
+
 ## Credits
 
 Credit goes to [Davis Clark's](https://github.com/jdc0589) as the author of the original plugin and its contributors (Scott Bessler, Curtis Gibby, Matt Morrison). Thanks for their awesome work on making such a robust and awesome case converter.
