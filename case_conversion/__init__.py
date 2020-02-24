@@ -1,6 +1,5 @@
 # flake8: noqa
 from .converter import (
-    parse_case,
     camel,
     pascal,
     snake,
@@ -17,4 +16,5 @@ from .converter import (
     capital,
     http_header,
 )
+from .parser import parse_case
 from .types import Case, InvalidAcronymError
