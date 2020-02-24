@@ -24,23 +24,25 @@ class CaseConverter:
         acronyms: Optional[List[str]] = None,
         preserve_case: bool = False,
     ) -> Tuple[List[str], Case, str]:
-        """
-        Parse a stringiable into a list of words.
+        """Split a string into words, determine its case and seperator.
 
-        Also returns the case type, which can be one of
-        the following:
-            - upper: All words are upper-case.
-            - lower: All words are lower-case.
-            - pascal: All words are title-case or upper-case. Note that the
-                      stringiable may still have separators.
-            - camel: First word is lower-case, the rest are title-case or
-                     upper-case. stringiable may still have separators.
-            - mixed: Any other mixing of word casing. Never occurs if there are
-                     no separators.
-            - unknown: stringiable contains no words.
+        Args:
+            string (str): Input string to be converted
+            acronyms (optional, list of str): List of acronyms to honor
+            preserve_case (bool): Whether to preserve case of acronym
 
-        Also returns the first separator character,
-        or False if there isn't one.
+        Returns:
+            list of str: Segmented input string
+            Case: Determined case
+            str: Determined seperator
+
+        Examples:
+            >>> parse_case("hello_world")
+            ["Hello", "World"], Case.LOWER, "_"
+            >>> parse_case("helloHTMLWorld", ["HTML"])
+            ["Hello", "HTML", World"], Case.MIXED, None
+            >>> parse_case("helloHtmlWorld", ["HTML"], True)
+            ["Hello", "Html", World"], Case.CAMEL, None
         """
         words_with_sep, separator, was_upper = segment_string(string)
 
